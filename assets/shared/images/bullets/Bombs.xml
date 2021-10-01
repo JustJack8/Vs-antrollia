@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Bombs.png">
+	<!-- Created with Adobe Animate version 18.0.0.107 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Bomb Clover0000" x="0" y="46" width="23" height="23" pivotX="0" pivotY="0"/>
+	<SubTexture name="Bomb Clover0001" x="0" y="46" width="23" height="23"/>
+	<SubTexture name="Bomb Clover0002" x="0" y="46" width="23" height="23"/>
+	<SubTexture name="Bomb Clover0003" x="23" y="46" width="23" height="23"/>
+	<SubTexture name="Bomb Clover0004" x="23" y="46" width="23" height="23"/>
+	<SubTexture name="Bomb Clover0005" x="23" y="46" width="23" height="23"/>
+	<SubTexture name="Bomb Heart0000" x="0" y="0" width="23" height="23" pivotX="0" pivotY="0"/>
+	<SubTexture name="Bomb Heart0001" x="0" y="0" width="23" height="23"/>
+	<SubTexture name="Bomb Heart0002" x="0" y="0" width="23" height="23"/>
+	<SubTexture name="Bomb Heart0003" x="23" y="0" width="23" height="23"/>
+	<SubTexture name="Bomb Heart0004" x="23" y="0" width="23" height="23"/>
+	<SubTexture name="Bomb Heart0005" x="23" y="0" width="23" height="23"/>
+	<SubTexture name="Bomb Prism0000" x="0" y="23" width="23" height="23" pivotX="0" pivotY="0"/>
+	<SubTexture name="Bomb Prism0001" x="0" y="23" width="23" height="23"/>
+	<SubTexture name="Bomb Prism0002" x="0" y="23" width="23" height="23"/>
+	<SubTexture name="Bomb Prism0003" x="23" y="23" width="23" height="23"/>
+	<SubTexture name="Bomb Prism0004" x="23" y="23" width="23" height="23"/>
+	<SubTexture name="Bomb Prism0005" x="23" y="23" width="23" height="23"/>
+	<SubTexture name="Bomb Spade0000" x="0" y="69" width="23" height="23" pivotX="0" pivotY="0"/>
+	<SubTexture name="Bomb Spade0001" x="0" y="69" width="23" height="23"/>
+	<SubTexture name="Bomb Spade0002" x="0" y="69" width="23" height="23"/>
+	<SubTexture name="Bomb Spade0003" x="23" y="69" width="23" height="23"/>
+	<SubTexture name="Bomb Spade0004" x="23" y="69" width="23" height="23"/>
+	<SubTexture name="Bomb Spade0005" x="23" y="69" width="23" height="23"/>
+</TextureAtlas>

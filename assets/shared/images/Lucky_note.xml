@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Lucky_note.png">
+	<!-- Created with Adobe Animate version 18.0.0.107 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Note Down0000" x="1845" y="1414" width="173" height="182" pivotX="175.5" pivotY="-14.55"/>
+	<SubTexture name="Note Hit Down0000" x="0" y="0" width="246" height="205" pivotX="197.6" pivotY="18.5"/>
+	<SubTexture name="Note Hit Down0001" x="246" y="0" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0002" x="492" y="0" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0003" x="738" y="0" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0004" x="984" y="0" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0005" x="1230" y="0" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0006" x="1476" y="0" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0007" x="1722" y="0" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0008" x="0" y="205" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0009" x="246" y="205" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0010" x="492" y="205" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0011" x="738" y="205" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0012" x="984" y="205" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0013" x="1230" y="205" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0014" x="1476" y="205" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0015" x="1722" y="205" width="246" height="205"/>
+	<SubTexture name="Note Hit Down0016" x="0" y="410" width="246" height="205"/>
+	<SubTexture name="Note Hit Left0000" x="492" y="820" width="205" height="246" pivotX="177.25" pivotY="33"/>
+	<SubTexture name="Note Hit Left0001" x="697" y="820" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0002" x="902" y="820" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0003" x="1107" y="820" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0004" x="1312" y="820" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0005" x="1517" y="820" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0006" x="1722" y="820" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0007" x="0" y="1025" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0008" x="205" y="1025" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0009" x="410" y="1066" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0010" x="615" y="1066" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0011" x="820" y="1066" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0012" x="1025" y="1066" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0013" x="1230" y="1066" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0014" x="1435" y="1066" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0015" x="1640" y="1066" width="205" height="246"/>
+	<SubTexture name="Note Hit Left0016" x="0" y="1271" width="205" height="246"/>
+	<SubTexture name="Note Hit Right0000" x="205" y="1271" width="205" height="245" pivotX="183.1" pivotY="38.9"/>
+	<SubTexture name="Note Hit Right0001" x="410" y="1312" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0002" x="615" y="1312" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0003" x="820" y="1312" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0004" x="1025" y="1312" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0005" x="1230" y="1312" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0006" x="1435" y="1312" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0007" x="1640" y="1312" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0008" x="205" y="1516" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0009" x="0" y="1517" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0010" x="410" y="1557" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0011" x="615" y="1557" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0012" x="820" y="1557" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0013" x="1025" y="1557" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0014" x="1230" y="1557" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0015" x="1435" y="1557" width="205" height="245"/>
+	<SubTexture name="Note Hit Right0016" x="1640" y="1557" width="205" height="245"/>
+	<SubTexture name="Note Hit Up0000" x="246" y="410" width="246" height="205" pivotX="205.35" pivotY="9.4"/>
+	<SubTexture name="Note Hit Up0001" x="492" y="410" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0002" x="738" y="410" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0003" x="984" y="410" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0004" x="1230" y="410" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0005" x="1476" y="410" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0006" x="1722" y="410" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0007" x="0" y="615" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0008" x="246" y="615" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0009" x="492" y="615" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0010" x="738" y="615" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0011" x="984" y="615" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0012" x="1230" y="615" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0013" x="1476" y="615" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0014" x="1722" y="615" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0015" x="0" y="820" width="246" height="205"/>
+	<SubTexture name="Note Hit Up0016" x="246" y="820" width="246" height="205"/>
+	<SubTexture name="Note Left0000" x="1845" y="1066" width="181" height="174" pivotX="179.5" pivotY="-18.55"/>
+	<SubTexture name="Note Right0000" x="1845" y="1240" width="181" height="174" pivotX="179.5" pivotY="-18.55"/>
+	<SubTexture name="Note UP0000" x="1845" y="1596" width="173" height="182" pivotX="175.5" pivotY="-14.55"/>
+</TextureAtlas>

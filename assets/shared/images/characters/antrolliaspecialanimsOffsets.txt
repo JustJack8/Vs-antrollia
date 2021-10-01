@@ -1,0 +1,7 @@
+awman 33 -40
+balls 34 -60
+keepitup 111 -37
+keepup 44 -61
+trolled 50 -60
+ugh 26 -60
+whitty 140 -60

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Garcello.png">
+	<!-- Created with Adobe Animate version 18.0.0.107 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Garcello0000" x="0" y="0" width="725" height="412" pivotX="1370.3" pivotY="-55.1"/>
+	<SubTexture name="Garcello0001" x="0" y="0" width="725" height="412"/>
+	<SubTexture name="Garcello0002" x="0" y="0" width="725" height="412"/>
+	<SubTexture name="Garcello0003" x="0" y="0" width="725" height="412"/>
+	<SubTexture name="Garcello0004" x="0" y="0" width="725" height="412"/>
+	<SubTexture name="Garcello0005" x="0" y="0" width="725" height="412"/>
+	<SubTexture name="Garcello0006" x="0" y="0" width="725" height="412"/>
+	<SubTexture name="Garcello0007" x="0" y="0" width="725" height="412"/>
+	<SubTexture name="Garcello0008" x="0" y="0" width="725" height="412"/>
+</TextureAtlas>

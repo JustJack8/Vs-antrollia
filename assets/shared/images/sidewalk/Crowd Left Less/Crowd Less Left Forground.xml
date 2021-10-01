@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Crowd Less Left Forground.png">
+	<!-- Created with Adobe Animate version 18.0.0.107 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Crowd Less People LEFT Forground0000" x="0" y="0" width="592" height="765" pivotX="890.65" pivotY="26.55"/>
+	<SubTexture name="Crowd Less People LEFT Forground0001" x="0" y="0" width="592" height="765"/>
+	<SubTexture name="Crowd Less People LEFT Forground0002" x="0" y="0" width="592" height="765"/>
+	<SubTexture name="Crowd Less People LEFT Forground0003" x="0" y="0" width="592" height="765"/>
+	<SubTexture name="Crowd Less People LEFT Forground0004" x="0" y="0" width="592" height="765"/>
+	<SubTexture name="Crowd Less People LEFT Forground0005" x="592" y="0" width="592" height="765"/>
+	<SubTexture name="Crowd Less People LEFT Forground0006" x="592" y="0" width="592" height="765"/>
+	<SubTexture name="Crowd Less People LEFT Forground0007" x="1184" y="0" width="592" height="765"/>
+	<SubTexture name="Crowd Less People LEFT Forground0008" x="1184" y="0" width="592" height="765"/>
+	<SubTexture name="Crowd Less People LEFT Forground0009" x="0" y="0" width="592" height="765"/>
+	<SubTexture name="Crowd Less People LEFT Forground0010" x="0" y="0" width="592" height="765"/>
+	<SubTexture name="Crowd Less People LEFT Forground0011" x="0" y="0" width="592" height="765"/>
+	<SubTexture name="Crowd Less People LEFT Forground0012" x="0" y="0" width="592" height="765"/>
+	<SubTexture name="Crowd Less People LEFT Forground0013" x="0" y="0" width="592" height="765"/>
+	<SubTexture name="Crowd Less People LEFT Forground0014" x="0" y="0" width="592" height="765"/>
+</TextureAtlas>

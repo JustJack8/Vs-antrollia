@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="maballs.png">
+<SubTexture name="balls in yo jaws0000" x="0" y="0" width="52" height="37" frameX="0" frameY="0" frameWidth="52" frameHeight="37" />
+<SubTexture name="cbt0000" x="52" y="0" width="52" height="37" frameX="0" frameY="0" frameWidth="52" frameHeight="37" />
+</TextureAtlas>

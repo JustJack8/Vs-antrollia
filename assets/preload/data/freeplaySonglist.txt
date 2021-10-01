@@ -1,0 +1,6 @@
+Tutorial:gf:0
+reconnected:dad:1
+explosive:dad:1
+cbt:dad:1
+blood-shed:dad:1
+exptrollgation:dad:1

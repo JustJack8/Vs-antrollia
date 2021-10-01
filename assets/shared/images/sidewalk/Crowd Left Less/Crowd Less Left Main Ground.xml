@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Crowd Less Left Main Ground.png">
+	<!-- Created with Adobe Animate version 18.0.0.107 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Crowd Less People LEFT Main Ground0000" x="0" y="0" width="782" height="779" pivotX="1370.3" pivotY="312.4"/>
+	<SubTexture name="Crowd Less People LEFT Main Ground0001" x="0" y="0" width="782" height="779"/>
+	<SubTexture name="Crowd Less People LEFT Main Ground0002" x="0" y="0" width="782" height="779"/>
+	<SubTexture name="Crowd Less People LEFT Main Ground0003" x="0" y="0" width="782" height="779"/>
+	<SubTexture name="Crowd Less People LEFT Main Ground0004" x="0" y="0" width="782" height="779"/>
+	<SubTexture name="Crowd Less People LEFT Main Ground0005" x="782" y="0" width="782" height="779"/>
+	<SubTexture name="Crowd Less People LEFT Main Ground0006" x="782" y="0" width="782" height="779"/>
+	<SubTexture name="Crowd Less People LEFT Main Ground0007" x="0" y="779" width="782" height="779"/>
+	<SubTexture name="Crowd Less People LEFT Main Ground0008" x="0" y="779" width="782" height="779"/>
+	<SubTexture name="Crowd Less People LEFT Main Ground0009" x="0" y="0" width="782" height="779"/>
+	<SubTexture name="Crowd Less People LEFT Main Ground0010" x="0" y="0" width="782" height="779"/>
+	<SubTexture name="Crowd Less People LEFT Main Ground0011" x="0" y="0" width="782" height="779"/>
+	<SubTexture name="Crowd Less People LEFT Main Ground0012" x="0" y="0" width="782" height="779"/>
+	<SubTexture name="Crowd Less People LEFT Main Ground0013" x="0" y="0" width="782" height="779"/>
+	<SubTexture name="Crowd Less People LEFT Main Ground0014" x="0" y="0" width="782" height="779"/>
+</TextureAtlas>
