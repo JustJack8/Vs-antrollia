@@ -31,6 +31,8 @@ class DialogueBox extends FlxSpriteGroup
 
 	var portraitLeft:FlxSprite;
 	var portraitRight:FlxSprite;
+	var cutscene:FlxSprite;
+	var cutsceneStr:String;
 
 	var handSelect:FlxSprite;
 	var bgFade:FlxSprite;
@@ -106,7 +108,9 @@ class DialogueBox extends FlxSpriteGroup
 		
 		if (!hasDialog)
 			return;
-
+		
+		cutscene = new FlxSprite(0, 0);
+		add(cutscene);
 
 		if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'roses' || PlayState.SONG.song.toLowerCase() == 'thorns') 
 		{
@@ -344,6 +348,8 @@ class DialogueBox extends FlxSpriteGroup
 					portraitRight.visible = true;
 					portraitRight.animation.play('BF Face 3');
 				}
+			 case 'nocutscene'
+				cutscene.visible = false;
 		//shadow this kek or cringe?
 		}
 		switch (cutsceneStr)
@@ -372,6 +378,8 @@ class DialogueBox extends FlxSpriteGroup
 	{
 		var splitName:Array<String> = dialogueList[0].split(":");
 		curCharacter = splitName[1];
+		cutsceneStr = splitName[2];
+		
 		dialogueList[0] = dialogueList[0].substr(splitName[1].length + 2).trim();
 	}
 }
