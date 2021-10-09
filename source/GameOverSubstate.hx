@@ -88,7 +88,7 @@ class GameOverSubstate extends MusicBeatSubstate
 			startVibin = true;
 			
 			if (PlayState.SONG.player2 == 'antrollia')
-				FlxG.sound.play(Paths.soundRandom('DeathQuote', 1, 28), 1, 27), 1.2);
+				FlxG.sound.play(Paths.soundRandom('DeathQuote', 1, 28), 1.2);
 		}
 
 		if (FlxG.sound.music.playing)
