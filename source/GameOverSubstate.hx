@@ -86,7 +86,9 @@ class GameOverSubstate extends MusicBeatSubstate
 			//pretty sloppy way of adding the death quotes, unless shadow wants to make it better
 			FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
 			startVibin = true;
-			FlxG.sound.play(Paths.soundRandom('DeathQuote', 1, 28), FlxG.random.float(0.1, 0.2));
+			
+			if (PlayState.SONG.player2 == 'antrollia')
+				FlxG.sound.play(Paths.soundRandom('DeathQuote', 1, 28), 1, 27), 1.2);
 		}
 
 		if (FlxG.sound.music.playing)
