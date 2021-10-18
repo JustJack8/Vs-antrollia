@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Antrollia Portraits.png">
+	<!-- Created with Adobe Animate version 18.0.0.107 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Antrolla Default0000" x="0" y="1042" width="442" height="521" pivotX="225" pivotY="217.45"/>
+	<SubTexture name="Antrollia Dont Know0000" x="442" y="521" width="442" height="521" pivotX="220" pivotY="261.45"/>
+	<SubTexture name="Antrollia Happy0000" x="0" y="521" width="442" height="521" pivotX="229" pivotY="265.45"/>
+	<SubTexture name="Antrollia No Clue0000" x="0" y="0" width="442" height="521" pivotX="263" pivotY="265.45"/>
+	<SubTexture name="Antrollia Sad0000" x="442" y="1042" width="442" height="520" pivotX="205" pivotY="243.95"/>
+	<SubTexture name="Antrollia Shocked0000" x="442" y="0" width="442" height="521" pivotX="221" pivotY="257.45"/>
+</TextureAtlas>

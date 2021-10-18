@@ -31,6 +31,8 @@ class DialogueBox extends FlxSpriteGroup
 
 	var portraitLeft:FlxSprite;
 	var portraitRight:FlxSprite;
+	var cutscene:FlxSprite;
+	var cutsceneStr:String;
 
 	var handSelect:FlxSprite;
 	var bgFade:FlxSprite;
@@ -91,9 +93,15 @@ class DialogueBox extends FlxSpriteGroup
 				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
 				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
 
-				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
-				face.setGraphicSize(Std.int(face.width * 6));
-				add(face);
+			case 'tutorial':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByIndices('normal', 'speech bubble normal', [4], "", 24);
+				box.width = 200;
+				box.height = 200;
+				box.x = -100;
+				box.y = 375;
 		}
 
 		this.dialogueList = dialogueList;
@@ -101,23 +109,60 @@ class DialogueBox extends FlxSpriteGroup
 		if (!hasDialog)
 			return;
 		
-		portraitLeft = new FlxSprite(-20, 40);
-		portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait');
-		portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-		portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
-		portraitLeft.updateHitbox();
-		portraitLeft.scrollFactor.set();
-		add(portraitLeft);
-		portraitLeft.visible = false;
+		cutscene = new FlxSprite(0, 0);
+		add(cutscene);
 
-		portraitRight = new FlxSprite(0, 40);
-		portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
-		portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-		portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
-		portraitRight.updateHitbox();
-		portraitRight.scrollFactor.set();
-		add(portraitRight);
-		portraitRight.visible = false;
+		if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'roses' || PlayState.SONG.song.toLowerCase() == 'thorns') 
+		{
+			portraitLeft = new FlxSprite(-20, 40);
+			portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait');
+			portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
+			portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
+			portraitLeft.updateHitbox();
+			portraitLeft.scrollFactor.set();
+			add(portraitLeft);
+			portraitLeft.visible = false;
+		}
+		else if (PlayState.SONG.song.toLowerCase() == 'tutorial')
+		{
+			portraitLeft = new FlxSprite(-1500, 10);
+			portraitLeft.frames = Paths.getSparrowAtlas('Portraits/Antrollia_Portraits', 'shared');
+			portraitLeft.animation.addByPrefix('Antrolla Default', 'Antrolla Default', 24, false);
+			portraitLeft.animation.addByPrefix('Antrollia Dont Know', 'Antrollia Dont Know', 24, false);
+			portraitLeft.animation.addByPrefix('Antrollia No Clue', 'Antrollia No Clue', 24, false);
+			portraitLeft.animation.addByPrefix('Antrollia Sad', 'Antrollia Sad', 24, false);
+			portraitLeft.animation.addByPrefix('Antrollia Shocked', 'Antrollia Shocked', 24, false);
+			portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.175));
+			portraitLeft.updateHitbox();
+			portraitLeft.scrollFactor.set();
+			add(portraitLeft);
+			portraitLeft.visible = false;
+		}
+		
+		if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'roses' || PlayState.SONG.song.toLowerCase() == 'thorns')
+		{
+			portraitRight = new FlxSprite(0, 40);
+			portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
+			portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
+			portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
+			portraitRight.updateHitbox();
+			portraitRight.scrollFactor.set();
+			add(portraitRight);
+			portraitRight.visible = false;
+		}
+		else if (PlayState.SONG.song.toLowerCase() == 'tutorial')
+		{
+			portraitRight = new FlxSprite(-50, 40);
+			portraitRight.frames = Paths.getSparrowAtlas('Portraits/BF_Portraits', 'shared');
+			portraitRight.animation.addByPrefix('BF Face 1', 'BF Face 1', 24, false);
+			portraitRight.animation.addByPrefix('BF Face 2', 'BF Face 2', 24, false);
+			portraitRight.animation.addByPrefix('BF Face 3', 'BF Face 3', 24, false);
+			portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.15));
+			portraitRight.updateHitbox();
+			portraitRight.scrollFactor.set();
+			add(portraitRight);
+			portraitRight.visible = false;
+		}
 		
 		box.animation.play('normalOpen');
 		box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
@@ -196,7 +241,7 @@ class DialogueBox extends FlxSpriteGroup
 				{
 					isEnding = true;
 
-					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'thorns')
+					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'thorns' || PlayState.SONG.song.toLowerCase() == 'tutorial')
 						sound.fadeOut(2.2, 0);
 					new FlxTimer().start(0.2, function(tmr:FlxTimer)
 					{
@@ -240,27 +285,101 @@ class DialogueBox extends FlxSpriteGroup
 
 		switch (curCharacter)
 		{
-			case 'dad':
+			case 'Antrollia1':
 				portraitRight.visible = false;
 				if (!portraitLeft.visible)
 				{
 					portraitLeft.visible = true;
-					portraitLeft.animation.play('enter');
+					portraitLeft.animation.play('Antrolla Default');
 				}
-			case 'bf':
+			case 'Antrollia2':
+				portraitRight.visible = false;
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('Antrollia Dont Know');
+				}
+			case 'Antrollia3':
+				portraitRight.visible = false;
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('Antrollia Dont Know');
+				}
+			case 'Antrollia4':					
+				portraitRight.visible = false;
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('Antrollia No Clue');
+				}
+			case 'Antrollia5':				
+				portraitRight.visible = false;
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('Antrollia Sad');
+				}
+			case 'Antrollia6':				
+				portraitRight.visible = false;
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('Antrollia Shocked');
+				}
+			case 'bf1':
 				portraitLeft.visible = false;
 				if (!portraitRight.visible)
 				{
 					portraitRight.visible = true;
-					portraitRight.animation.play('enter');
+					portraitRight.animation.play('BF Face 1');
 				}
+			case 'bf2':
+				portraitLeft.visible = false;
+				if (!portraitRight.visible)
+				{
+					portraitRight.visible = true;
+					portraitRight.animation.play('BF Face 2');
+				}
+			case 'bf3':
+				portraitLeft.visible = false;
+				if (!portraitRight.visible)
+				{
+					portraitRight.visible = true;
+					portraitRight.animation.play('BF Face 3');
+				}
+			 case 'nocutscene'
+				cutscene.visible = false;
+		//shadow this kek or cringe?
 		}
+		switch (cutsceneStr)
+		{
+			case 'hide':
+			{
+				cutscene.visible = false;
+			}
+
+			case 'no':
+			{
+				trace('nothin changing here lmao');
+			}
+
+			default:
+			{
+				cutscene.visible = true;
+				cutscene.loadGraphic(Paths.image('cutscenes/' + cutsceneStr));
+			}
+
+		}
+
 	}
 
 	function cleanDialog():Void
 	{
 		var splitName:Array<String> = dialogueList[0].split(":");
 		curCharacter = splitName[1];
+		cutsceneStr = splitName[2];
+		
 		dialogueList[0] = dialogueList[0].substr(splitName[1].length + 2).trim();
 	}
 }
