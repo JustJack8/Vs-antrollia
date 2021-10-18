@@ -1,6 +1,6 @@
 Tutorial:gf:0
-reconnected:dad:1
-explosive:dad:1
-cbt:dad:1
-blood-shed:dad:1
-exptrollgation:dad:1
+reconnected:antrollia:1
+explosive:antrollia:1
+cbt:antrollia:1
+blood-shed:antrollia:1
+exptrollgation:jevillia:1

@@ -266,6 +266,10 @@ class Note extends FlxSprite
 		var stepHeight = (((0.45 * Conductor.stepCrochet)) * FlxMath.roundDecimal(PlayStateChangeables.scrollSpeed == 1 ? PlayState.SONG.speed : PlayStateChangeables.scrollSpeed, 2));
 
 		// we can't divide step height cuz if we do uh it'll fucking lag the shit out of the game
+		if (isSustainNote && PlayState.SONG.stage == 'jevilbg')
+			{
+				y -= 35;
+			}
 
 		if (isSustainNote && prevNote != null)
 		{
@@ -324,16 +328,16 @@ class Note extends FlxSprite
 		{
 			if (isSustainNote)
 			{
-				if (strumTime - Conductor.songPosition  <= ((166 * Conductor.timeScale) * PlayState.songMultiplier * 0.5)
-					&& strumTime - Conductor.songPosition  >=((-166 * Conductor.timeScale) * PlayState.songMultiplier))
+				if (strumTime - Conductor.songPosition  <= ((166 * Conductor.timeScale) * 0.5)
+					&& strumTime - Conductor.songPosition  >=((-166 * Conductor.timeScale)))
 					canBeHit = true;
 				else
 					canBeHit = false;
 			}
 			else
 			{
-				if (strumTime - Conductor.songPosition  <= ((166 * Conductor.timeScale) * PlayState.songMultiplier)
-					&& strumTime  - Conductor.songPosition >= ((-166 * Conductor.timeScale) * PlayState.songMultiplier))
+				if (strumTime - Conductor.songPosition  <= ((166 * Conductor.timeScale))
+					&& strumTime  - Conductor.songPosition >= ((-166 * Conductor.timeScale)))
 					canBeHit = true;
 				else
 					canBeHit = false;

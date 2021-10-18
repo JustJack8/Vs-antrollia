@@ -171,6 +171,7 @@ class Caching extends MusicBeatState
 		{
 			FlxG.sound.cache(Paths.inst(i));
 			FlxG.sound.cache(Paths.voices(i));
+			FlxG.sound.cache(Paths.juke(i));
 			trace("cached " + i);
 			done++;
 		}

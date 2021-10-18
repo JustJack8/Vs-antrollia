@@ -13,6 +13,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.net.curl.CURLCode;
+import flixel.addons.display.FlxBackdrop;
 
 #if windows
 import Discord.DiscordClient;
@@ -23,6 +24,9 @@ using StringTools;
 class StoryMenuState extends MusicBeatState
 {
 	var scoreText:FlxText;
+	var backdrops1:FlxBackdrop = new FlxBackdrop(Paths.image('gfthing'), 0.2, 0.2, true, true);
+	var backdrops2:FlxBackdrop = new FlxBackdrop(Paths.image('bfthing'), 0.2, 0.2, true, true);
+	var backdrops3:FlxBackdrop = new FlxBackdrop(Paths.image('antthing'), 0.2, 0.2, true, true);
 
 	static function weekData():Array<Dynamic>
 	{
@@ -53,6 +57,8 @@ class StoryMenuState extends MusicBeatState
 	var txtWeekTitle:FlxText;
 
 	var curWeek:Int = 0;
+
+	var color:Int = 0;
 
 	var bg:FlxSprite;
 	var bg2:FlxSprite;
@@ -107,6 +113,18 @@ class StoryMenuState extends MusicBeatState
 				Conductor.changeBPM(102);
 			}
 		}
+
+		add(backdrops3);
+		backdrops3.scrollFactor.set(0, 0.07);
+		backdrops3.angle = 45;
+
+		add(backdrops2);
+		backdrops2.scrollFactor.set(0, 0.07);
+		backdrops2.angle = 45;
+
+		add(backdrops1);
+		backdrops1.scrollFactor.set(0, 0.07);
+		backdrops1.angle = 45;
 
 		persistentUpdate = persistentDraw = true;
 
@@ -208,7 +226,7 @@ class StoryMenuState extends MusicBeatState
 		bg.screenCenter(X);
 		add(bg);
 
-		bg2 = new FlxSprite(0,90).loadGraphic(Paths.image('week1'));
+		bg2 = new FlxSprite(0,93).loadGraphic(Paths.image('week1'));
 		bg2.updateHitbox();
 		bg2.screenCenter(X);
 		add(bg2);
@@ -351,6 +369,48 @@ class StoryMenuState extends MusicBeatState
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 
+		backdrops3.y -= 2 / (120 / 60);
+		backdrops2.y -= 2 / (120 / 60);
+		backdrops1.y -= 2 / (120 / 60);
+
+		if (curWeek == 0)
+			{
+				backdrops3.alpha = 0;
+			}
+			else
+				{
+					backdrops1.alpha = 0;
+				}
+
+		if (color >= 2)
+			color = 0;
+
+		switch (curWeek)
+		{
+			case 0:
+				if (color == 0)
+					{
+						backdrops2.alpha = 0;
+						backdrops1.alpha = 1;
+					}
+					else
+						{
+							backdrops2.alpha = 1;
+							backdrops1.alpha = 0;
+						}
+			case 1:
+				if (color == 0)
+					{
+						backdrops2.alpha = 0;
+						backdrops3.alpha = 1;
+					}
+					else
+						{
+							backdrops2.alpha = 1;
+							backdrops3.alpha = 0;
+						}
+		}
+
 		super.update(elapsed);
 	}
 
@@ -374,7 +434,6 @@ class StoryMenuState extends MusicBeatState
 			PlayState.storyPlaylist = weekData()[curWeek];
 			PlayState.isStoryMode = true;
 			selectedWeek = true;
-			PlayState.songMultiplier = 1;
 
 			PlayState.storyDifficulty = curDifficulty;
 
@@ -506,6 +565,8 @@ class StoryMenuState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
+
+		color ++;
 
 		grpWeekCharacters.members[0].bopHead();
 		grpWeekCharacters.members[1].bopHead();

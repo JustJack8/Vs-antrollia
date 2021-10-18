@@ -101,7 +101,7 @@ class Ratings
         {
             var time = timingWindows[index];
             var nextTime = index + 1 > timingWindows.length - 1 ? 0 : timingWindows[index + 1];
-            if (diff < time * PlayState.songMultiplier && diff >= nextTime * PlayState.songMultiplier)
+            if (diff < time && diff >= nextTime)
             {
                 switch(index)
                 {

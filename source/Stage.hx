@@ -366,7 +366,7 @@ class Stage
 						bg.animation.addByPrefix('idle', 'Jevil_battle_background_screenshot_gif');
 						bg.animation.play('idle');
 						bg.screenCenter();
-						bg.scale.set(7, 7);
+						bg.setGraphicSize(Std.int(bg.width * 7));
 						bg.x -= 265;
 						bg.y -= 90;
 						bg.antialiasing = false;

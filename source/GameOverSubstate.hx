@@ -5,7 +5,10 @@ import flixel.FlxObject;
 import flixel.FlxSubState;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
+import flixel.FlxSprite;
 import flixel.util.FlxTimer;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 
 class GameOverSubstate extends MusicBeatSubstate
 {
@@ -32,10 +35,18 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		Conductor.songPosition = 0;
 
+		FlxG.save.data.death ++;
+
+		if (FlxG.save.data.death == 100)
+			{
+				trophygot();
+			}
+
 		bf = new Boyfriend(x, y, daBf);
 		add(bf);
 
-		camFollow = new FlxObject(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y, 1, 1);
+
+		camFollow = new FlxObject(bf.getGraphicMidpoint().x + 200, bf.getGraphicMidpoint().y, 1, 1);
 		add(camFollow);
 
 		FlxG.sound.play(Paths.sound('fnf_loss_sfx' + stageSuffix));
@@ -83,6 +94,8 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
 		{
+			FlxTween.tween(FlxG.camera, {zoom: 1.4}, 2.5, {
+				ease: FlxEase.quadInOut});
 			//pretty sloppy way of adding the death quotes, unless shadow wants to make it better
 			FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
 			startVibin = true;
@@ -109,6 +122,17 @@ class GameOverSubstate extends MusicBeatSubstate
 	}
 
 	var isEnding:Bool = false;
+
+	function trophygot() {
+		var got:FlxSprite = new FlxSprite(-600,10).loadGraphic(Paths.image('unlocked'));
+		add(got);
+		FlxTween.tween(got,{x: 10},1);
+		FlxG.sound.play(Paths.sound('levelup'));
+		new FlxTimer().start(1.5, function(tmr:FlxTimer)
+			{
+				FlxTween.tween(got,{x: -600},1);
+			});
+	}
 
 	function endBullshit():Void
 	{

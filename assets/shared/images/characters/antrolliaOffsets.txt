@@ -3,3 +3,13 @@ singUP 45 -36
 singRIGHT 68 -67
 singLEFT 52 -62
 singDOWN 1 -116
+awman 8 -46
+balls -6 -60
+keepitup 87 -51
+keepup 6 -67
+trolled 8 -66
+ugh -5 -68
+whitty 96 -65
+tnt 108 -61
+owfuck 83 -59
+bruh 83 -59

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="gray.png">
+<SubTexture name="menu storyidle0000" x="0" y="0" width="1795" height="365" frameX="0" frameY="0" frameWidth="1795" frameHeight="365" />
+<SubTexture name="menu freeidle0000" x="1795" y="0" width="1795" height="365" frameX="0" frameY="0" frameWidth="1795" frameHeight="365" />
+<SubTexture name="menu optionsidle0000" x="3590" y="0" width="1795" height="365" frameX="0" frameY="0" frameWidth="1795" frameHeight="365" />
+<SubTexture name="menu creditidle0000" x="5385" y="0" width="1795" height="365" frameX="0" frameY="0" frameWidth="1795" frameHeight="365" />
+<SubTexture name="menu storyselect0000" x="0" y="365" width="1795" height="411" frameX="0" frameY="0" frameWidth="1795" frameHeight="411" />
+<SubTexture name="menu freeselect0000" x="1795" y="365" width="1795" height="407" frameX="0" frameY="0" frameWidth="1795" frameHeight="407" />
+<SubTexture name="menu optionsselect0000" x="3590" y="365" width="1795" height="419" frameX="0" frameY="0" frameWidth="1795" frameHeight="419" />
+<SubTexture name="menu creditselect0000" x="5385" y="365" width="1795" height="419" frameX="0" frameY="0" frameWidth="1795" frameHeight="419" />
+<SubTexture name="menu trophyidle0000" x="0" y="784" width="208" height="1095" frameX="0" frameY="0" frameWidth="208" frameHeight="1095" />
+<SubTexture name="menu trophyselect0000" x="208" y="784" width="208" height="1095" frameX="0" frameY="0" frameWidth="208" frameHeight="1095" />
+<SubTexture name="menu extraidle0000" x="416" y="784" width="208" height="1095" frameX="0" frameY="0" frameWidth="208" frameHeight="1095" />
+<SubTexture name="menu extraselect0000" x="624" y="784" width="248" height="1095" frameX="0" frameY="0" frameWidth="248" frameHeight="1095" />
+</TextureAtlas>

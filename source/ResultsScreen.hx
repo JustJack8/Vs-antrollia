@@ -88,7 +88,7 @@ class ResultsScreen extends FlxSubState
         var bads = PlayState.isStoryMode ? PlayState.campaignBads : PlayState.bads;
         var shits = PlayState.isStoryMode ? PlayState.campaignShits : PlayState.shits;
 
-        comboText = new FlxText(20,-75,0,'Judgements:\nSicks - ${sicks}\nGoods - ${goods}\nBads - ${bads}\n\nCombo Breaks: ${(PlayState.isStoryMode ? PlayState.campaignMisses : PlayState.misses)}\nHighest Combo: ${PlayState.highestCombo + 1}\nScore: ${PlayState.instance.songScore}\nAccuracy: ${HelperFunctions.truncateFloat(PlayState.instance.accuracy,2)}%\n\n${Ratings.GenerateLetterRank(PlayState.instance.accuracy)}\nRate: ${PlayState.songMultiplier}x\n\n${!PlayState.loadRep ? "\nF1 - Replay song" : ""}
+        comboText = new FlxText(20,-75,0,'Judgements:\nSicks - ${sicks}\nGoods - ${goods}\nBads - ${bads}\n\nCombo Breaks: ${(PlayState.isStoryMode ? PlayState.campaignMisses : PlayState.misses)}\nHighest Combo: ${PlayState.highestCombo + 1}\nScore: ${PlayState.instance.songScore}\nAccuracy: ${HelperFunctions.truncateFloat(PlayState.instance.accuracy,2)}%\n\n${Ratings.GenerateLetterRank(PlayState.instance.accuracy)}\nRate: ${1}x\n\n${!PlayState.loadRep ? "\nF1 - Replay song" : ""}
         ');
         comboText.size = 28;
         comboText.setBorderStyle(FlxTextBorderStyle.OUTLINE,FlxColor.BLACK,4,1);
@@ -147,7 +147,7 @@ class ResultsScreen extends FlxSubState
             if (diff != (166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166))
                 mean += diff;
             if (obj[1] != -1)
-                graph.addToHistory(diff / PlayState.songMultiplier, judge, obj3 / PlayState.songMultiplier);
+                graph.addToHistory(diff, judge, obj3);
         }
 
         if (sicks == Math.POSITIVE_INFINITY || sicks == Math.NaN)

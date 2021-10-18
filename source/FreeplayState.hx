@@ -10,6 +10,7 @@ import sys.io.File;
 #end
 import Song.SwagSong;
 import flixel.input.gamepad.FlxGamepad;
+import flixel.util.FlxTimer;
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -19,7 +20,7 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
-
+import flixel.addons.display.FlxBackdrop;
 
 #if windows
 import Discord.DiscordClient;
@@ -38,6 +39,9 @@ class FreeplayState extends MusicBeatState
 	public static var curSelected:Int = 0;
 	public static var curDifficulty:Int = 1;
 
+	var uh:Float = 0;
+	var oh:Float = 0;
+
 	var scoreText:FlxText;
 	var comboText:FlxText;
 	var diffText:FlxText;
@@ -46,9 +50,12 @@ class FreeplayState extends MusicBeatState
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
 	var combo:String = '';
+	var backdrops:FlxBackdrop = new FlxBackdrop(Paths.image('test2'), 0.2, 0.2, true, true);
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
+
+	public var gay:Bool = false;
 
 	private var iconArray:Array<HealthIcon> = [];
 
@@ -198,6 +205,10 @@ class FreeplayState extends MusicBeatState
 		bg.antialiasing = FlxG.save.data.antialiasing;
 		add(bg);
 
+		add(backdrops);
+		backdrops.scrollFactor.set(0, 0.07);
+		backdrops.angle = 45;
+
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
@@ -225,7 +236,7 @@ class FreeplayState extends MusicBeatState
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
 		// scoreText.alignment = RIGHT;
 
-		var scoreBG:FlxSprite = new FlxSprite(scoreText.x - 6, 0).makeGraphic(Std.int(FlxG.width * 0.35), 135, 0xFF000000);
+		var scoreBG:FlxSprite = new FlxSprite(scoreText.x - 6, 0).makeGraphic(Std.int(FlxG.width * 0.35), 108, 0xFF000000);
 		scoreBG.alpha = 0.6;
 		add(scoreBG);
 
@@ -239,7 +250,6 @@ class FreeplayState extends MusicBeatState
 
 		previewtext = new FlxText(scoreText.x, scoreText.y + 94, 0, "Rate: " + rate + "x", 24);
 		previewtext.font = scoreText.font;
-		add(previewtext);
 
 		comboText = new FlxText(diffText.x + 100, diffText.y, 0, "", 24);
 		comboText.font = diffText.font;
@@ -280,6 +290,7 @@ class FreeplayState extends MusicBeatState
 		super.create();
 	}
 
+
 	public function addSong(songName:String, weekNum:Int, songCharacter:String)
 	{
 		songs.push(new SongMetadata(songName, weekNum, songCharacter));
@@ -304,6 +315,29 @@ class FreeplayState extends MusicBeatState
 	{
 		super.update(elapsed);
 
+		switch (curSelected)
+		{
+			case 0:
+				oh = 0.7;
+				gay = true;
+			case 1:
+				oh = 1.5;
+				gay = false;
+			case 2:
+				oh = 2;
+				gay = true;
+			case 3:
+				oh = 3;
+				gay = false;
+			case 4:
+				oh = 5;
+				gay = true;
+			case 5:
+				oh = 3;
+				gay = false;
+
+		}
+
 		if (FlxG.sound.music.volume < 0.7)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
@@ -321,6 +355,17 @@ class FreeplayState extends MusicBeatState
 		{
 			FlxG.sound.music.volume -= 0.5 * FlxG.elapsed;
 		}
+
+		if (gay)
+			{
+				backdrops.x -= oh / (120 / 60);
+				backdrops.y -= oh / (120 / 60);
+			}
+			else
+				{
+					backdrops.x += oh / (120 / 60);
+					backdrops.y += oh / (120 / 60);
+				}
 
 		var upP = FlxG.keys.justPressed.UP;
 		var downP = FlxG.keys.justPressed.DOWN;
@@ -368,12 +413,10 @@ class FreeplayState extends MusicBeatState
 		{
 			if (FlxG.keys.justPressed.LEFT)
 			{
-				rate -= 0.05;
 				diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
 			}
 			if (FlxG.keys.justPressed.RIGHT)
 			{
-				rate += 0.05;
 				diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
 			}
 
@@ -432,8 +475,6 @@ class FreeplayState extends MusicBeatState
 				return;
 			}
 
-
-
 			PlayState.SONG = Song.conversionChecks(hmm);
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = curDifficulty;
@@ -451,8 +492,6 @@ class FreeplayState extends MusicBeatState
 			#else
 			PlayState.isSM = false;
 			#end
-
-			PlayState.songMultiplier = rate;
 
 			LoadingState.loadAndSwitchState(new PlayState());
 
@@ -472,6 +511,7 @@ class FreeplayState extends MusicBeatState
 		if (curDifficulty > 2)
 			curDifficulty = 0;
 
+		trace(curSelected);
 
 		// adjusting the highscore song name to be compatible (changeDiff)
 		var songHighscore = StringTools.replace(songs[curSelected].songName, " ", "-");
@@ -496,6 +536,7 @@ class FreeplayState extends MusicBeatState
 
 		// NGio.logEvent('Fresh');
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+
 
 
 
@@ -592,6 +633,7 @@ class FreeplayState extends MusicBeatState
 			}
 		}
 	}
+
 }
 
 class SongMetadata

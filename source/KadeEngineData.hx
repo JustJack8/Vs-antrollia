@@ -83,7 +83,7 @@ class KadeEngineData
 			FlxG.save.data.flashing = true;
 
 		if (FlxG.save.data.resetButton == null)
-			FlxG.save.data.resetButton = false;
+			FlxG.save.data.resetButton = true;
 
 		if (FlxG.save.data.InstantRespawn == null)
 			FlxG.save.data.InstantRespawn = false;
@@ -120,6 +120,54 @@ class KadeEngineData
 		
 		if (FlxG.save.data.zoom == null)
 			FlxG.save.data.zoom = 1;
+
+		if (FlxG.save.data.reconnected == null)
+			FlxG.save.data.reconnected = false;
+
+		if (FlxG.save.data.explosion == null)
+			FlxG.save.data.explosion = false;
+
+		if (FlxG.save.data.cbt == null)
+			FlxG.save.data.cbt = false;
+
+		if (FlxG.save.data.blood == null)
+			FlxG.save.data.blood = false;
+
+		if (FlxG.save.data.jevil == null)
+			FlxG.save.data.jevil = false;
+
+		if (FlxG.save.data.kade == null)
+			FlxG.save.data.kade = false;
+
+		if (FlxG.save.data.hdwgh == null)
+			FlxG.save.data.hdwgh = false;
+
+		if (FlxG.save.data.chungus == null)
+			FlxG.save.data.chungus = false;
+
+		if (FlxG.save.data.life == null)
+			FlxG.save.data.life = false;
+
+		if (FlxG.save.data.totalmiss == null)
+			FlxG.save.data.totalmiss = 0;
+
+		if (FlxG.save.data.death == null)
+			FlxG.save.data.death = 0;
+
+		if (FlxG.save.data.nodeath == null)
+			FlxG.save.data.nodeath = false;
+
+		if (FlxG.save.data.reconnectedfc == null)
+			FlxG.save.data.reconnectedfc = false;
+
+		if (FlxG.save.data.explosionfc == null)
+			FlxG.save.data.explosionfc = false;
+
+		if (FlxG.save.data.cbtfc == null)
+			FlxG.save.data.cbtfc = false;
+
+		if (FlxG.save.data.bloodfc == null)
+			FlxG.save.data.bloodfc = false;
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 		

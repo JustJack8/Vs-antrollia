@@ -36,6 +36,7 @@ class Heartbullet extends FlxSprite
 		animation.addByPrefix('boom', 'Bomb Heart',24);
 		animation.play('boom');
 		scale.set(3,3);
+		acceleration.y = Random.int(120, 160);
 	}
 	
 

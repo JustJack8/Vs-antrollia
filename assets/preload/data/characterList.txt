@@ -2,4 +2,7 @@ bf
 dad
 gf
 antrollia
-antrolliaspecialanims
+jevillia
+bf-pixel
+gf-pixel
+antcrazy

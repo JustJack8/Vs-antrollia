@@ -119,18 +119,17 @@ class Character extends FlxSprite
 			case 'gf-pixel':
 				tex = Paths.getSparrowAtlas('gfPixel','shared',true);
 				frames = tex;
-				animation.addByIndices('singUP', 'GF IDLE', [2], "", 24, false);
-				animation.addByIndices('danceLeft', 'GF IDLE', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-				animation.addByIndices('danceRight', 'GF IDLE', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+				animation.addByIndices('singUP', 'gfidle', [2], "", 24, false);
+				animation.addByIndices('danceLeft', 'gfidle', [31, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+				animation.addByIndices('danceRight', 'gfidle', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30], "", 24, false);
 
 				loadOffsetFile(curCharacter);
 
 				playAnim('danceRight');
 
-				setGraphicSize(Std.int(width * 3.3));
+				setGraphicSize(Std.int(width * 6));
 				updateHitbox();
 				antialiasing = false;
-				flipX = true;
 
 			case 'dad':
 				noteSkin = 'antrollnotes';
@@ -259,6 +258,8 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
 				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
 				animation.addByPrefix('hey', 'BF HEY', 24, false);
+				animation.addByPrefix('kill', 'bfa pre attack', 24, false);
+				animation.addByPrefix('def', 'BF DOWN SHIELD', 24, false);
 
 				animation.addByPrefix('firstDeath', "BF dies", 24, false);
 				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, false);
@@ -311,25 +312,28 @@ class Character extends FlxSprite
 			case 'bf-pixel':
 				noteSkin = 'jevil-pixels';
 				frames = Paths.getSparrowAtlas('bfPixel','shared',true);
-				animation.addByPrefix('idle', 'BF IDLE', 24, false);
-				animation.addByPrefix('singUP', 'BF UP NOTE', 24, false);
-				animation.addByPrefix('singRIGHT', 'BF LEFT NOTE', 24, false);
-				animation.addByPrefix('singLEFT', 'BF RIGHT NOTE', 24, false);
-				animation.addByPrefix('singDOWN', 'BF DOWN NOTE', 24, false);
-				animation.addByPrefix('singUPmiss', 'BF UP MISS', 24, false);
-				animation.addByPrefix('singRIGHTmiss', 'BF LEFT MISS', 24, false);
-				animation.addByPrefix('singLEFTmiss', 'BF RIGHT MISS', 24, false);
-				animation.addByPrefix('singDOWNmiss', 'BF DOWN MISS', 24, false);
+				animation.addByPrefix('idle', 'BF Idle_gif', 24, false);
+				animation.addByPrefix('singUP', 'BF Up_gif', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF Right_gif', 24, false);
+				animation.addByPrefix('singLEFT', 'BF Left_gif', 24, false);
+				animation.addByPrefix('singDOWN', 'BF Down_gif', 24, false);
+				animation.addByPrefix('singUPmiss', 'BF Up Fuck_gif', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'BF Right Fuck_gif', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'BF Left Fuck_gif', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'BF Down Fuck_gif', 24, false);
+				animation.addByPrefix('hit', 'BF Hit_gif', 24, false);
 
 				loadOffsetFile(curCharacter);
 
-				setGraphicSize(Std.int(width * 3.3));
+				setGraphicSize(Std.int(width * 6));
 				updateHitbox();
 
 				playAnim('idle');
 
 				width -= 100;
 				height -= 100;
+
+				flipX = true;
 
 				antialiasing = false;
 			case 'bf-pixel-dead':
@@ -415,6 +419,20 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 
+			case 'antcrazy':
+				noteSkin = 'antrollnotes';
+				tex = Paths.getSparrowAtlas('trolled_lol','shared',true);
+				frames = tex;
+				animation.addByPrefix('idle', 'antrollia evil idle dance', 24, false);
+				animation.addByPrefix('singUP', 'antrollia evil sing up', 24, false);
+				animation.addByPrefix('singRIGHT', 'antrollia evil sing right', 24, false);
+				animation.addByPrefix('singDOWN', 'antrollia evil sing down', 24, false);
+				animation.addByPrefix('singLEFT', 'antrollia evil sing left', 24, false);
+
+				loadOffsetFile(curCharacter);
+
+				playAnim('idle');
+
 			case 'antrollia':
 				noteSkin = 'antrollnotes';
 				tex = Paths.getSparrowAtlas('Antrollia','shared',true);
@@ -424,6 +442,16 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHT', 'antrollia right sing', 24, false);
 				animation.addByPrefix('singDOWN', 'antrollia down sing', 24, false);
 				animation.addByPrefix('singLEFT', 'antrollia left sing', 24, false);
+				animation.addByPrefix('awman', 'antrollia z aw man', 24, false);
+				animation.addByPrefix('balls', 'antrollia z balls', 24, false);
+				animation.addByPrefix('keepitup', 'antrollia z keep it up', 24, false);
+				animation.addByPrefix('keepup', 'antrollia z keep up', 24, false);
+				animation.addByPrefix('trolled', 'antrollia z trolled', 24, false);
+				animation.addByPrefix('ugh', 'antrollia z ugh', 24, false);
+				animation.addByPrefix('whitty', 'antrollia z whitty', 24, false);
+				animation.addByPrefix('tnt', 'antrollia tnt', 24, false);
+				animation.addByPrefix('owfuck', 'ow FUCK', 24, false);
+				animation.addByIndices('bruh', 'ow FUCK', [42], "", 24, false);
 
 				loadOffsetFile(curCharacter);
 
@@ -447,23 +475,6 @@ class Character extends FlxSprite
 
 				setGraphicSize(Std.int(width * 6));
 				antialiasing = false;
-
-				case 'antrolliaspecialanims':
-					noteSkin = 'antrollnotes';
-					tex = Paths.getSparrowAtlas('Antrollia','shared',true);
-					frames = tex;
-
-					animation.addByPrefix('awman', 'antrollia z aw man', 24, false);
-					animation.addByPrefix('balls', 'antrollia z balls', 24, false);
-					animation.addByPrefix('keepitup', 'antrollia z keep it up', 24, false);
-					animation.addByPrefix('keepup', 'antrollia z keep up', 24, false);
-					animation.addByPrefix('trolled', 'antrollia z trolled', 24, false);
-					animation.addByPrefix('ugh', 'antrollia z ugh', 24, false);
-					animation.addByPrefix('whitty', 'antrollia z whitty', 24, false);
-	
-					loadOffsetFile(curCharacter);
-	
-					playAnim('idle');
 		}
 
 		dance();
@@ -517,7 +528,6 @@ class Character extends FlxSprite
 				dadVar = 6.1;
 			if (holdTimer >= Conductor.stepCrochet * dadVar * 0.001)
 			{
-				trace('dance');
 				dance();
 				holdTimer = 0;
 			}
@@ -562,10 +572,16 @@ class Character extends FlxSprite
 					else
 						playAnim('danceLeft');
 				default:
-					if (altAnim && animation.getByName('idle-alt') != null)
-						playAnim('idle-alt', forced);
-					else
-						playAnim('idle', forced);
+					if (!animation.curAnim.name.startsWith('awman') && animation.curAnim.finished || !animation.curAnim.name.startsWith('balls') && animation.curAnim.finished ||
+						!animation.curAnim.name.startsWith('trolled') && animation.curAnim.finished || !animation.curAnim.name.startsWith('whitty') && animation.curAnim.finished ||
+						!animation.curAnim.name.startsWith('keepup') && animation.curAnim.finished || !animation.curAnim.name.startsWith('keepitup') && animation.curAnim.finished ||
+						!animation.curAnim.name.startsWith('ugh') && animation.curAnim.finished || !animation.curAnim.name.startsWith('owfuck') && animation.curAnim.finished)
+						{
+							if (altAnim && animation.getByName('idle-alt') != null)
+								playAnim('idle-alt', forced);
+							else
+								playAnim('idle', forced);
+						}
 			}
 		}
 	}
