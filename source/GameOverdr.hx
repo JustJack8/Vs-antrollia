@@ -74,6 +74,8 @@ class GameOverdr extends MusicBeatSubstate
 				textlmao = 'Trolling Trolling!';
 			case 7:
 				textlmao = 'Bye byeeeeeee';
+			case 8:
+				textlmao = 'clearly youve never played bunker bumrush'
 		}
 
 		lol = new FlxTypeText(0, 0, Std.int(FlxG.width), "* " + textlmao, 32);
