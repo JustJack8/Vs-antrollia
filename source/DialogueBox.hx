@@ -1,6 +1,5 @@
 package;
 
-import flixel.system.FlxSound;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.text.FlxTypeText;
@@ -10,6 +9,8 @@ import flixel.input.FlxKeyManager;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 
 using StringTools;
 
@@ -29,79 +30,65 @@ class DialogueBox extends FlxSpriteGroup
 
 	public var finishThing:Void->Void;
 
-	var portraitLeft:FlxSprite;
-	var portraitRight:FlxSprite;
+	var portrait:FlxSprite;
+	var bbboxu:FlxSprite; //bbpanzu but a box jk this is just the cooler box thing lol
 	var cutscene:FlxSprite;
 	var cutsceneStr:String;
 
 	var handSelect:FlxSprite;
 	var bgFade:FlxSprite;
-
-	var sound:FlxSound;
+	var scoreText:FlxText;
+	var scoreText2:FlxText;
 
 	public function new(talkingRight:Bool = true, ?dialogueList:Array<String>)
 	{
 		super();
+		scoreText = new FlxText(895, 680, 0, "Press Q to skip all dialogue", 36);
+		scoreText.setFormat("VCR OSD Mono", 32);
+		scoreText2 = new FlxText(897, 682, 0, "Press Q to skip all dialogue", 36);
+		scoreText2.setFormat("VCR OSD Mono", 32, FlxColor.BLUE);
 
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'senpai':
-				sound = new FlxSound().loadEmbedded(Paths.music('Lunchbox'),true);
-				sound.volume = 0;
-				FlxG.sound.list.add(sound);
-				sound.fadeIn(1, 0, 0.8);
 			case 'thorns':
-				sound = new FlxSound().loadEmbedded(Paths.music('LunchboxScary'),true);
-				sound.volume = 0;
-				FlxG.sound.list.add(sound);
-				sound.fadeIn(1, 0, 0.8);
+				FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
+				FlxG.sound.music.fadeIn(1, 0, 0.8);
 		}
+		FlxG.sound.playMusic(Paths.music('week'+PlayState.storyWeek), 0);
+		FlxG.sound.music.fadeIn(1, 0, 0.8);
 
 		bgFade = new FlxSprite(-200, -200).makeGraphic(Std.int(FlxG.width * 1.3), Std.int(FlxG.height * 1.3), 0xFFB3DFd8);
 		bgFade.scrollFactor.set();
 		bgFade.alpha = 0;
 		add(bgFade);
 
-		new FlxTimer().start(0.83, function(tmr:FlxTimer)
+		new FlxTimer().start(0.2, function(tmr:FlxTimer)
 		{
-			bgFade.alpha += (1 / 5) * 0.7;
-			if (bgFade.alpha > 0.7)
-				bgFade.alpha = 0.7;
+					bgFade.alpha = .5;
+					bgFade.alpha += (.05);
+					if (bgFade.alpha > 0.7)
+					bgFade.alpha = 0.7;
 		}, 5);
 
-		box = new FlxSprite(-20, 45);
+		box = new FlxSprite(0, 375);
 		
 		var hasDialog = false;
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'senpai':
+			default:
 				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-pixel');
-				box.animation.addByPrefix('normalOpen', 'Text Box Appear', 24, false);
-				box.animation.addByIndices('normal', 'Text Box Appear', [4], "", 24);
-			case 'roses':
-				hasDialog = true;
-				FlxG.sound.play(Paths.sound('ANGRY_TEXT_BOX'));
-
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-senpaiMad');
-				box.animation.addByPrefix('normalOpen', 'SENPAI ANGRY IMPACT SPEECH', 24, false);
-				box.animation.addByIndices('normal', 'SENPAI ANGRY IMPACT SPEECH', [4], "", 24);
-
+				box.frames = Paths.getSparrowAtlas('portraits/speech_bubble_talking');
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech normal bubble', 24, true);
 			case 'thorns':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil');
 				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
 				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
 
-			case 'tutorial':
-				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
-				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
-				box.animation.addByIndices('normal', 'speech bubble normal', [4], "", 24);
-				box.width = 200;
-				box.height = 200;
-				box.x = -100;
-				box.y = 375;
+				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
+				face.setGraphicSize(Std.int(face.width * 6));
+				add(face);
 		}
 
 		this.dialogueList = dialogueList;
@@ -111,103 +98,90 @@ class DialogueBox extends FlxSpriteGroup
 		
 		cutscene = new FlxSprite(0, 0);
 		add(cutscene);
+		bbboxu = new FlxSprite(Std.parseFloat(CoolUtil.coolTextFile('assets/images/portraits/DialogueSetup.txt')[0].split(":")[1]), Std.parseFloat(CoolUtil.coolTextFile('assets/images/portraits/DialogueSetup.txt')[1].split(":")[1]));
+		add(bbboxu);
 
-		if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'roses' || PlayState.SONG.song.toLowerCase() == 'thorns') 
-		{
-			portraitLeft = new FlxSprite(-20, 40);
-			portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait');
-			portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-			portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
-			portraitLeft.updateHitbox();
-			portraitLeft.scrollFactor.set();
-			add(portraitLeft);
-			portraitLeft.visible = false;
-		}
-		else if (PlayState.SONG.song.toLowerCase() == 'tutorial')
-		{
-			portraitLeft = new FlxSprite(-1500, 10);
-			portraitLeft.frames = Paths.getSparrowAtlas('Portraits/Antrollia_Portraits', 'shared');
-			portraitLeft.animation.addByPrefix('Antrolla Default', 'Antrolla Default', 24, false);
-			portraitLeft.animation.addByPrefix('Antrollia Dont Know', 'Antrollia Dont Know', 24, false);
-			portraitLeft.animation.addByPrefix('Antrollia No Clue', 'Antrollia No Clue', 24, false);
-			portraitLeft.animation.addByPrefix('Antrollia Sad', 'Antrollia Sad', 24, false);
-			portraitLeft.animation.addByPrefix('Antrollia Shocked', 'Antrollia Shocked', 24, false);
-			portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.175));
-			portraitLeft.updateHitbox();
-			portraitLeft.scrollFactor.set();
-			add(portraitLeft);
-			portraitLeft.visible = false;
-		}
-		
-		if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'roses' || PlayState.SONG.song.toLowerCase() == 'thorns')
-		{
-			portraitRight = new FlxSprite(0, 40);
-			portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
-			portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-			portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
-			portraitRight.updateHitbox();
-			portraitRight.scrollFactor.set();
-			add(portraitRight);
-			portraitRight.visible = false;
-		}
-		else if (PlayState.SONG.song.toLowerCase() == 'tutorial')
-		{
-			portraitRight = new FlxSprite(-50, 40);
-			portraitRight.frames = Paths.getSparrowAtlas('Portraits/BF_Portraits', 'shared');
-			portraitRight.animation.addByPrefix('BF Face 1', 'BF Face 1', 24, false);
-			portraitRight.animation.addByPrefix('BF Face 2', 'BF Face 2', 24, false);
-			portraitRight.animation.addByPrefix('BF Face 3', 'BF Face 3', 24, false);
-			portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.15));
-			portraitRight.updateHitbox();
-			portraitRight.scrollFactor.set();
-			add(portraitRight);
-			portraitRight.visible = false;
-		}
-		
+		portrait = new FlxSprite(0, 210);
+		portrait.frames = Paths.getSparrowAtlas('portraits/pump_ports');
+		portrait.animation.addByPrefix('enter', 'pump content port ', 24, false);
+		portrait.setGraphicSize(Std.int(portrait.width * 1));
+		portrait.updateHitbox();
+		portrait.scrollFactor.set();
+		add(portrait);
+		portrait.visible = false;
+
+		box.visible = false;
 		box.animation.play('normalOpen');
-		box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
+		box.setGraphicSize(Std.int(box.width * 1));
 		box.updateHitbox();
 		add(box);
 
-		box.screenCenter(X);
-		portraitLeft.screenCenter(X);
-
-		handSelect = new FlxSprite(FlxG.width * 0.9, FlxG.height * 0.9).loadGraphic(Paths.image('weeb/pixelUI/hand_textbox'));
+		handSelect = new FlxSprite(FlxG.width * 0.9, FlxG.height * 0.9).loadGraphic(Paths.image('hand_textbox'));
 		add(handSelect);
 
 
-		if (!talkingRight)
+		if (portrait.visible = true)
 		{
-			// box.flipX = true;
+			//box.flipX = true;
 		}
 
-		dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
+
+		dropText = new FlxText(Std.parseFloat(CoolUtil.coolTextFile('assets/images/portraits/DialogueSetup.txt')[2].split(":")[1])+2, Std.parseFloat(CoolUtil.coolTextFile('assets/images/portraits/DialogueSetup.txt')[3].split(":")[1])+2, Std.int(FlxG.width * 0.6), "", 32);
 		dropText.font = 'Pixel Arial 11 Bold';
-		dropText.color = 0xFFD89494;
+		dropText.color = 0xFF3F2021;
 		add(dropText);
 
-		swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
+		swagDialogue = new FlxTypeText(Std.parseFloat(CoolUtil.coolTextFile('assets/images/portraits/DialogueSetup.txt')[2].split(":")[1]), Std.parseFloat(CoolUtil.coolTextFile('assets/images/portraits/DialogueSetup.txt')[3].split(":")[1]), Std.int(FlxG.width * 0.6), "", 32);
 		swagDialogue.font = 'Pixel Arial 11 Bold';
-		swagDialogue.color = 0xFF3F2021;
+		swagDialogue.color = 0xFFD89494;
 		swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
 		add(swagDialogue);
+		add(scoreText);
+		add(scoreText2);
 
 		dialogue = new Alphabet(0, 80, "", false, true);
 		// dialogue.x = 90;
 		// add(dialogue);
+					funnyAlphaLoop();
 	}
 
 	var dialogueOpened:Bool = false;
 	var dialogueStarted:Bool = false;
+	var diaSkip:Bool = false;
+	var targetnumalpha:Float = 0;
+	var _typing:Bool = false;
 
 	override function update(elapsed:Float)
 	{
-		// HARD CODING CUZ IM STUPDI
-		if (PlayState.SONG.song.toLowerCase() == 'roses')
-			portraitLeft.visible = false;
+		scoreText2.alpha = scoreText.alpha;
+		
+		if (FlxG.keys.justPressed.Q)
+			{
+				PlayState.shitterman = "rr";
+				PlayState.usedTime = false;
+				bgFade.visible = true;
+				diaSkip = true;
+				isEnding = true;
+				FlxG.sound.music.fadeOut(2.2, 0);
+
+				new FlxTimer().start(0.1, function(tmr:FlxTimer)
+				{
+					box.alpha -= 1 / 10;
+					bgFade.alpha -= 1 / 10 * 0.7;
+					portrait.visible = false;
+					swagDialogue.alpha -= 1 / 10;
+					dropText.alpha = swagDialogue.alpha;
+				}, 5);
+
+				new FlxTimer().start(.5, function(tmr:FlxTimer)
+				{
+					finishThing();
+					kill();
+				});
+			}
 		if (PlayState.SONG.song.toLowerCase() == 'thorns')
 		{
-			portraitLeft.visible = false;
+			portrait.color = FlxColor.BLACK;
 			swagDialogue.color = FlxColor.WHITE;
 			dropText.color = FlxColor.BLACK;
 		}
@@ -229,31 +203,33 @@ class DialogueBox extends FlxSpriteGroup
 			dialogueStarted = true;
 		}
 
-		if (PlayerSettings.player1.controls.ACCEPT && dialogueStarted == true)
+		if (FlxG.keys.justPressed.ANY  && dialogueStarted == true || diaSkip == true)
 		{
 			remove(dialogue);
 				
-			FlxG.sound.play(Paths.sound('clickText'), 0.8);
+			if (diaSkip == false)
+				{
+					FlxG.sound.play(Paths.sound('clickText'), 0.8);
+				}
+				diaSkip = false;
 
 			if (dialogueList[1] == null && dialogueList[0] != null)
 			{
 				if (!isEnding)
 				{
 					isEnding = true;
+					FlxG.sound.music.fadeOut(2.2, 0);
 
-					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'thorns' || PlayState.SONG.song.toLowerCase() == 'tutorial')
-						sound.fadeOut(2.2, 0);
-					new FlxTimer().start(0.2, function(tmr:FlxTimer)
+					new FlxTimer().start(0.1, function(tmr:FlxTimer)
 					{
-						box.alpha -= 1 / 5;
-						bgFade.alpha -= 1 / 5 * 0.7;
-						portraitLeft.visible = false;
-						portraitRight.visible = false;
-						swagDialogue.alpha -= 1 / 5;
+						bbboxu.alpha -= 1 / 10;
+						bgFade.alpha -= 1 / 10 * 0.7;
+						portrait.visible = false;
+						swagDialogue.alpha -= 1 / 10;
 						dropText.alpha = swagDialogue.alpha;
 					}, 5);
 
-					new FlxTimer().start(1.2, function(tmr:FlxTimer)
+					new FlxTimer().start(.5, function(tmr:FlxTimer)
 					{
 						finishThing();
 						kill();
@@ -267,6 +243,15 @@ class DialogueBox extends FlxSpriteGroup
 			}
 		}
 		
+		if (swagDialogue._typing && dialogueList[0] != ' …' && dialogueList[0] != ' ...')
+			{
+				portrait.animation.play('talk');
+			}
+		else if (!swagDialogue._typing)
+			{
+				portrait.animation.stop;
+			}
+
 		super.update(elapsed);
 	}
 
@@ -280,106 +265,83 @@ class DialogueBox extends FlxSpriteGroup
 		// add(theDialog);
 
 		// swagDialogue.text = ;
-		swagDialogue.resetText(dialogueList[0]);
-		swagDialogue.start(0.04, true);
-
-		switch (curCharacter)
+		cutscene.visible = false;
+		if (!portrait.visible)
 		{
-			case 'Antrollia1':
-				portraitRight.visible = false;
-				if (!portraitLeft.visible)
-				{
-					portraitLeft.visible = true;
-					portraitLeft.animation.play('Antrolla Default');
-				}
-			case 'Antrollia2':
-				portraitRight.visible = false;
-				if (!portraitLeft.visible)
-				{
-					portraitLeft.visible = true;
-					portraitLeft.animation.play('Antrollia Dont Know');
-				}
-			case 'Antrollia3':
-				portraitRight.visible = false;
-				if (!portraitLeft.visible)
-				{
-					portraitLeft.visible = true;
-					portraitLeft.animation.play('Antrollia Dont Know');
-				}
-			case 'Antrollia4':					
-				portraitRight.visible = false;
-				if (!portraitLeft.visible)
-				{
-					portraitLeft.visible = true;
-					portraitLeft.animation.play('Antrollia No Clue');
-				}
-			case 'Antrollia5':				
-				portraitRight.visible = false;
-				if (!portraitLeft.visible)
-				{
-					portraitLeft.visible = true;
-					portraitLeft.animation.play('Antrollia Sad');
-				}
-			case 'Antrollia6':				
-				portraitRight.visible = false;
-				if (!portraitLeft.visible)
-				{
-					portraitLeft.visible = true;
-					portraitLeft.animation.play('Antrollia Shocked');
-				}
-			case 'bf1':
-				portraitLeft.visible = false;
-				if (!portraitRight.visible)
-				{
-					portraitRight.visible = true;
-					portraitRight.animation.play('BF Face 1');
-				}
-			case 'bf2':
-				portraitLeft.visible = false;
-				if (!portraitRight.visible)
-				{
-					portraitRight.visible = true;
-					portraitRight.animation.play('BF Face 2');
-				}
-			case 'bf3':
-				portraitLeft.visible = false;
-				if (!portraitRight.visible)
-				{
-					portraitRight.visible = true;
-					portraitRight.animation.play('BF Face 3');
-				}
-			 case 'nocutscene'
-				cutscene.visible = false;
-		//shadow this kek or cringe?
+			portrait.visible = true;
 		}
-		switch (cutsceneStr)
+			switch(curCharacter)
+			{
+				case 'image':
+					PlayState.shitterman = cutsceneStr;
+					PlayState.usedTime = true;
+					bgFade.visible = false;
+					diaSkip = true;
+				case 'endimage':
+					PlayState.shitterman = "rr";
+					PlayState.usedTime = false;
+					bgFade.visible = true;
+					diaSkip = true;
+				default:
+					swagDialogue.color = FlxColor.fromString(CoolUtil.coolTextFile('assets/images/portraits/$curCharacter/info.txt')[3].split(":")[0]);
+					dropText.color = FlxColor.fromString(CoolUtil.coolTextFile('assets/images/portraits/$curCharacter/info.txt')[3].split(":")[1]);
+					remove(bbboxu);
+					bbboxu.loadGraphic('assets/images/portraits/$curCharacter/box.png');
+					remove(portrait);
+					portrait = new FlxSprite(Std.parseFloat(CoolUtil.coolTextFile('assets/images/portraits/$curCharacter/info.txt')[0]),Std.parseFloat(CoolUtil.coolTextFile('assets/images/portraits/$curCharacter/info.txt')[1]));
+					portrait.frames = Paths.getSparrowAtlas('portraits/$curCharacter/ports');
+					portrait.animation.addByPrefix('talk', cutsceneStr, 24, false);
+					portrait.setGraphicSize(Std.int(portrait.width*Std.parseFloat(CoolUtil.coolTextFile('assets/images/portraits/$curCharacter/info.txt')[2])));
+					portrait.updateHitbox();
+					portrait.scrollFactor.set();
+					add(portrait);
+					add(bbboxu);
+					//swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dialogue/$curCharacter'+'-01'), 0.6),FlxG.sound.load(Paths.sound('dialogue/$curCharacter'+'-02'), 0.6),FlxG.sound.load(Paths.sound('dialogue/$curCharacter'+'-03'), 0.6),FlxG.sound.load(Paths.sound('dialogue/$curCharacter'+'-04'), 0.6),FlxG.sound.load(Paths.sound('dialogue/$curCharacter'+'-05'), 0.6)];
+					swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dialogue/$curCharacter'+'-0'+FlxG.random.int(1,5)), 0.6)];
+					swagDialogue.resetText(dialogueList[0]); // PUMPPPPPPO curCharacter is the character
+					swagDialogue.start(0.04, true);
+			}
+			/*switch (cutsceneStr)
+			{
+				case 'hide':
+				{
+					cutscene.visible = false;
+				}
+	
+				case 'no':
+				{
+					trace('nothin changing here lmao');
+				}
+	
+				default:
+				{
+					cutscene.visible = true;
+					cutscene.loadGraphic(Paths.image('cutscenes/' + cutsceneStr));
+				}
+	
+	
+			}*/
+		}
+	
+		function cleanDialog():Void
 		{
-			case 'hide':
-			{
-				cutscene.visible = false;
-			}
-
-			case 'no':
-			{
-				trace('nothin changing here lmao');
-			}
-
-			default:
-			{
-				cutscene.visible = true;
-				cutscene.loadGraphic(Paths.image('cutscenes/' + cutsceneStr));
-			}
-
+			var splitName:Array<String> = dialogueList[0].split(":");
+			curCharacter = splitName[1];
+			cutsceneStr = splitName[2];
+	
+			dialogueList[0] = dialogueList[0].substr(splitName[1].length + splitName[2].length + 3).trim();
 		}
 
+		function funnyAlphaLoop():Void
+			{
+			FlxTween.tween(scoreText, {alpha: targetnumalpha}, 0.7, {ease: FlxEase.quintOut,
+				onComplete: function(twn:FlxTween)
+				{
+					if (targetnumalpha == 0)
+					targetnumalpha = 1;
+					else if (targetnumalpha == 1)
+					targetnumalpha = 0;
+					funnyAlphaLoop();
+				}});
+			}
 	}
-
-	function cleanDialog():Void
-	{
-		var splitName:Array<String> = dialogueList[0].split(":");
-		curCharacter = splitName[1];
-		cutsceneStr = splitName[2];
-		
-		dialogueList[0] = dialogueList[0].substr(splitName[1].length + 2).trim();
-	}
-}
