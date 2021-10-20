@@ -246,6 +246,11 @@ class PlayState extends MusicBeatState
 	public static var campaignShits:Int = 0;
 	public static var campaigndeaths:Int = 0;
 
+	//Dialogue shit 
+	var imageFucker:FlxSprite;
+	public static var shitterman:String = "";
+	public static var usedTime:Bool = false;
+
 	public var accuracy:Float = 0.00;
 
 	private var accuracyDefault:Float = 0.00;
@@ -6878,6 +6883,24 @@ class Spadebullet extends FlxSprite {
 
   override function update(elapsed:Float)
     {
+		
+		if (shitterman != "" && usedTime)
+			{
+				usedTime = false;
+				//camHUD.visible = false;
+				imageFucker = new FlxSprite(Std.parseFloat(shitterman.split(",")[1]),Std.parseFloat(shitterman.split(",")[2])).loadGraphic(Paths.image('cutscenes/'+shitterman.split(",")[0]));
+				imageFucker.setGraphicSize(Std.int(Std.parseFloat(shitterman.split(",")[3])));
+				imageFucker.updateHitbox();
+				imageFucker.scrollFactor.set();
+				add(imageFucker);
+			}
+		else if (shitterman == "rr")
+			{
+				remove(imageFucker);
+				//camHUD.visible = true;
+				shitterman == "";
+			}
+			
       super.update(elapsed);
 
 	  switch (gay)
