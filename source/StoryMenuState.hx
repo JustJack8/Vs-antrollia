@@ -7,6 +7,7 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxGroup;
+import sys.io.Process;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
@@ -31,7 +32,7 @@ class StoryMenuState extends MusicBeatState
 	static function weekData():Array<Dynamic>
 	{
 		return [
-			['Tutorial'],
+			['Tutorial-remix'],
 			['reconnected', 'explosive', 'cbt','blood-shed']
 		];
 	}
@@ -39,7 +40,7 @@ class StoryMenuState extends MusicBeatState
 	static function weekName():Array<Dynamic>
 		{
 			return [
-				['Tutorial'],
+				['Tutorial-remix'],
 				['reconnected', 'explosive', 'cbt']
 			];
 		}
@@ -316,15 +317,6 @@ class StoryMenuState extends MusicBeatState
 						leftArrow.animation.play('press');
 					else
 						leftArrow.animation.play('idle');
-
-					if (gamepad.justPressed.DPAD_RIGHT)
-					{
-						changeDifficulty(1);
-					}
-					if (gamepad.justPressed.DPAD_LEFT)
-					{
-						changeDifficulty(-1);
-					}
 				}
 
 				if (FlxG.keys.justPressed.UP)
@@ -347,10 +339,6 @@ class StoryMenuState extends MusicBeatState
 				else
 					leftArrow.animation.play('idle');
 
-				if (controls.RIGHT_P)
-					changeDifficulty(1);
-				if (controls.LEFT_P)
-					changeDifficulty(-1);
 			}
 
 			if (controls.ACCEPT)
@@ -453,6 +441,19 @@ class StoryMenuState extends MusicBeatState
 			PlayState.SONG = Song.conversionChecks(Song.loadFromJson(poop, PlayState.storyPlaylist[0]));
 			PlayState.storyWeek = curWeek;
 			PlayState.campaignScore = 0;
+			PlayState.dia = true;
+
+			var process = new Process("tasklist", []);
+			var output = process.stdout.readAll().toString().toLowerCase();
+			var apps:Array<String> = ['obs64.exe', 'obs32.exe', 'streamlabs obs.exe', 'streamlabs obs32.exe'];
+			for (i in 0...apps.length)
+			{
+				if (output.contains(apps[i]))
+				{
+					PlayState.streaming = true;
+				}
+			}
+			process.close();
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
 				LoadingState.loadAndSwitchState(new PlayState(), true);

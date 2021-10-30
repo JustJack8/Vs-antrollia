@@ -262,7 +262,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('def', 'BF DOWN SHIELD', 24, false);
 
 				animation.addByPrefix('firstDeath', "BF dies", 24, false);
-				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, false);
+				animation.addByPrefix('deathLoop', "BF Dead Loop", 24);
 				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
 
 				animation.addByPrefix('scared', 'BF idle shaking', 24);
@@ -431,8 +431,6 @@ class Character extends FlxSprite
 
 				loadOffsetFile(curCharacter);
 
-				playAnim('idle');
-
 			case 'antrollia':
 				noteSkin = 'antrollnotes';
 				tex = Paths.getSparrowAtlas('Antrollia','shared',true);
@@ -571,6 +569,11 @@ class Character extends FlxSprite
 						playAnim('danceRight');
 					else
 						playAnim('danceLeft');
+				case 'antcrazy':
+					if (altAnim && animation.getByName('idle-alt') != null)
+						playAnim('idle-alt', forced);
+					else
+						playAnim('idle', forced);
 				default:
 					if (!animation.curAnim.name.startsWith('awman') && animation.curAnim.finished || !animation.curAnim.name.startsWith('balls') && animation.curAnim.finished ||
 						!animation.curAnim.name.startsWith('trolled') && animation.curAnim.finished || !animation.curAnim.name.startsWith('whitty') && animation.curAnim.finished ||

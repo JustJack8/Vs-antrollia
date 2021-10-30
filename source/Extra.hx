@@ -165,6 +165,8 @@ class Extra extends MusicBeatState//just a freeplaystate copy because im too laz
 		}
 		#end
 
+		trace("WTF IS CRASHIN");
+
 		//trace("\n" + diffList);
 
 		/* 
@@ -180,7 +182,7 @@ class Extra extends MusicBeatState//just a freeplaystate copy because im too laz
 		 DiscordClient.changePresence("In the Extra Menu", null);
 		 #end
 
-		var isDebug:Bool = false;
+		var isDebug:Bool = true;
 
 		#if debug
 		isDebug = true;
@@ -300,12 +302,6 @@ class Extra extends MusicBeatState//just a freeplaystate copy because im too laz
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-
-		if (FlxG.sound.music.volume < 0.7)
-		{
-			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
-		}
-
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, 0.4));
 
 		if (Math.abs(lerpScore - intendedScore) <= 10)
@@ -313,11 +309,6 @@ class Extra extends MusicBeatState//just a freeplaystate copy because im too laz
 
 		scoreText.text = "PERSONAL BEST:" + lerpScore;
 		comboText.text = combo + '\n';
-
-		if (FlxG.sound.music.volume > 0.8)
-		{
-			FlxG.sound.music.volume -= 0.5 * FlxG.elapsed;
-		}
 
 		var upP = FlxG.keys.justPressed.UP;
 		var downP = FlxG.keys.justPressed.DOWN;
@@ -338,14 +329,6 @@ class Extra extends MusicBeatState//just a freeplaystate copy because im too laz
 				state++;
 				changeSelection(1);
 			}
-			if (gamepad.justPressed.DPAD_LEFT)
-			{
-				changeDiff(-1);
-			}
-			if (gamepad.justPressed.DPAD_RIGHT)
-			{
-				changeDiff(1);
-			}
 
 			//if (gamepad.justPressed.X && !openedPreview)
 				//openSubState(new DiffOverview());
@@ -364,52 +347,15 @@ class Extra extends MusicBeatState//just a freeplaystate copy because im too laz
 
 		if (state < 0)
 			state = 1;
-		if (state == 2)
+		if (state == 1)
 			state = 0;
 
 		//if (FlxG.keys.justPressed.SPACE && !openedPreview)
 			//openSubState(new DiffOverview());
 
-		if (FlxG.keys.pressed.SHIFT)
-		{
-			if (FlxG.keys.justPressed.LEFT)
-			{
-				diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
-			}
-			if (FlxG.keys.justPressed.RIGHT)
-			{
-				diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
-			}
-
-			if (rate > 3)
-			{
-				rate = 3;
-				diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
-			}
-			else if (rate < 0.5)
-			{
-				rate = 0.5;
-				diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
-			}
-
-			previewtext.text = "Rate: " + rate + "x";
-		}
-		else
-		{
-			if (FlxG.keys.justPressed.LEFT)
-				changeDiff(-1);
-			if (FlxG.keys.justPressed.RIGHT)
-				changeDiff(1);
-		}
+	
 		
-					
-		#if cpp
-		@:privateAccess
-		{
-			if (FlxG.sound.music.playing)
-				lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, rate);
-		}
-		#end
+				
 
 		if (controls.BACK)
 		{
@@ -423,7 +369,6 @@ class Extra extends MusicBeatState//just a freeplaystate copy because im too laz
 			{
 				case 0:
 					FlxG.switchState(new Jukebox());
-				case 1:
 			}
 		}
 	}
@@ -452,7 +397,7 @@ class Extra extends MusicBeatState//just a freeplaystate copy because im too laz
 		intendedScore = Highscore.getScore(songHighscore, curDifficulty);
 		combo = Highscore.getCombo(songHighscore, curDifficulty);
 		#end
-		diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
+		diffCalcText.text = 'a';
 		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
 	}
 
@@ -493,16 +438,6 @@ class Extra extends MusicBeatState//just a freeplaystate copy because im too laz
 		//diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
 		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
 		
-
-		var hmm;
-			try
-			{
-				hmm = songData.get(songs[curSelected].songName)[curDifficulty];
-				if (hmm != null)
-					Conductor.changeBPM(hmm.bpm);
-			}
-			catch(ex)
-			{}
 
 		if (openedPreview)
 		{

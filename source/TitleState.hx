@@ -145,9 +145,9 @@ class TitleState extends MusicBeatState
 
 		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
 		gfDance.frames = Paths.getSparrowAtlas('Bazinga');
-		gfDance.y -= 300;
-		gfDance.x -= 500;
-		gfDance.scale.set(0.7,0.7);
+		gfDance.y -= 500;
+		gfDance.x -= 380;
+		gfDance.scale.set(0.5,0.5);
 		gfDance.animation.addByPrefix('idle', "Antrollia Title Screen", 16, false);
 		gfDance.antialiasing = FlxG.save.data.antialiasing;
 		add(gfDance);
@@ -344,69 +344,78 @@ class TitleState extends MusicBeatState
 		logoBl.animation.play('bump', true);
 		gfDance.animation.play('idle',true);
 
-		FlxG.log.add(curBeat);
+		//FlxG.log.add(curBeat);
 
-		switch (curBeat)
-		{
-			case 0:
-				deleteCoolText();
-			case 1:
-				createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
-			// credTextShit.visible = true;
-			case 3:
-				addMoreText('present');
-			// credTextShit.text += '\npresent...';
-			// credTextShit.addText();
-			case 4:
-				deleteCoolText();
-			// credTextShit.visible = false;
-			// credTextShit.text = 'In association \nwith';
-			// credTextShit.screenCenter();
-			case 5:
-				if (Main.watermarks)
-					createCoolText(['Kade Engine', 'by']);
-				else
-					createCoolText(['In Partnership', 'with']);
-			case 7:
-				if (Main.watermarks)
-					addMoreText('KadeDeveloper');
-				else
-				{
-					addMoreText('Newgrounds');
-					ngSpr.visible = true;
-				}
-			// credTextShit.text += '\nNewgrounds';
-			case 8:
-				deleteCoolText();
-				ngSpr.visible = false;
-			// credTextShit.visible = false;
 
-			// credTextShit.text = 'Shoutouts Tom Fulp';
-			// credTextShit.screenCenter();
-			case 9:
-				createCoolText([curWacky[0]]);
-			// credTextShit.visible = true;
-			case 11:
-				addMoreText(curWacky[1]);
-			// credTextShit.text += '\nlmao';
-			case 12:
-				deleteCoolText();
-			// credTextShit.visible = false;
-			// credTextShit.text = "Friday";
-			// credTextShit.screenCenter();
-			case 13:
-				addMoreText('Friday');
-			// credTextShit.visible = true;
-			case 14:
-				addMoreText('Night');
-			// credTextShit.text += '\nNight';
-			case 15:
-				addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
-
-			case 16:
-				skipIntro();
-		}
 	}
+
+	override function stepHit()
+		{
+			super.stepHit();
+
+			FlxG.log.add(curStep);
+
+			switch (curStep)
+			{
+				case 0:
+					deleteCoolText();
+				case 4:
+					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
+				// credTextShit.visible = true;
+				case 11:
+					addMoreText('cooldevs');
+				// credTextShit.text += '\npresent...';
+				// credTextShit.addText();
+				case 16:
+					deleteCoolText();
+				// credTextShit.visible = false;
+				// credTextShit.text = 'In association \nwith';
+				// credTextShit.screenCenter();
+				case 19:
+					if (Main.watermarks)
+						createCoolText(['Kade Engine', 'modified by']);
+					else
+						createCoolText(['In Partnership', 'with']);
+				case 25:
+					if (Main.watermarks)
+						addMoreText('Shadowfi');
+					else
+					{
+						addMoreText('Newgrounds');
+						ngSpr.visible = true;
+					}
+				// credTextShit.text += '\nNewgrounds';
+				case 29:
+					deleteCoolText();
+					ngSpr.visible = false;
+				// credTextShit.visible = false;
+	
+				// credTextShit.text = 'Shoutouts Tom Fulp';
+				// credTextShit.screenCenter();
+				case 33:
+					createCoolText([curWacky[0]]);
+				// credTextShit.visible = true;
+				case 39:
+					addMoreText(curWacky[1]);
+				// credTextShit.text += '\nlmao';
+				case 43:
+					deleteCoolText();
+				// credTextShit.visible = false;
+				// credTextShit.text = "Friday";
+				// credTextShit.screenCenter();
+				case 52:
+					addMoreText('Vs');
+				// credTextShit.visible = true;
+				case 54:
+					addMoreText('Antrollia');
+				// credTextShit.text += '\nNight';
+				case 57:
+					skipIntro();
+	
+				case 16:
+					
+			}
+		}
 
 	var skippedIntro:Bool = false;
 

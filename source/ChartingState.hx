@@ -3310,7 +3310,7 @@ class ChartingState extends MusicBeatState
 
 	function loadJson(song:String):Void
 	{
-		var difficultyArray:Array<String> = ["-easy", "", "-hard"];
+		var difficultyArray:Array<String> = ["", "", ""];
 		var format = StringTools.replace(PlayState.SONG.song.toLowerCase(), " ", "-");
 		switch (format) {
 			case 'Dad-Battle': format = 'Dadbattle';

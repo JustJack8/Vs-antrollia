@@ -36,6 +36,16 @@ class Paths
 		return getPreloadPath(file);
 	}
 
+	static public function exists(someString:String):Bool
+		{
+			var toRet:Bool = false;
+			if (OpenFlAssets.exists(someString))
+			{
+				toRet = true;
+			}
+			return toRet;
+		}
+
 	static public function getLibraryPath(file:String, library = "preload")
 	{
 		return if (library == "preload" || library == "default") getPreloadPath(file); else getLibraryPathForce(file, library);
@@ -44,6 +54,12 @@ class Paths
 	inline static function getLibraryPathForce(file:String, library:String)
 	{
 		return '$library:assets/$library/$file';
+	}
+
+	inline static public function video(key:String, ?library:String)
+	{
+		trace('assets/videos/$key.mp4');
+		return getPath('videos/$key.mp4', BINARY, library);
 	}
 
 	inline static function getPreloadPath(file:String)

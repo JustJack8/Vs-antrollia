@@ -1,0 +1,18 @@
+:bgskip:nothin
+:stv:antlines/shew
+:ant-tired:Shew, man this has been hard, and i’m getting really tired.
+:bf:Beep! 
+:stv:gflines/Not even trying
+:gf:Yeah Boyfriend hasn’t even been trying so far.
+:stv:antlines/wh
+:ant-wah:w-
+:stv:antlines/uh
+:ant-wah:I-
+:stv:antlines/REally
+:ant-wah:really??
+:bf:Bup! 
+:stv:antlines/Christ Dude
+:ant-christ:Christ dude, well how about we do one, for real then, show me everything you got!
+:bf:Seki Dop!
+:stv:gflines/Now thats how you do it
+:gf:Now that’s how you do it!

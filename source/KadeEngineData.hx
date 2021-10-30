@@ -46,6 +46,9 @@ class KadeEngineData
 		if (FlxG.save.data.fpsRain == null)
 			FlxG.save.data.fpsRain = false;
 
+		if (FlxG.save.data.seenjevil == null)
+			FlxG.save.data.seenjevil = false;
+
 		if (FlxG.save.data.fpsCap == null)
 			FlxG.save.data.fpsCap = 120;
 
@@ -113,7 +116,7 @@ class KadeEngineData
 			FlxG.save.data.optimize = false;
 		
 		if (FlxG.save.data.cacheImages == null)
-			FlxG.save.data.cacheImages = false;
+			FlxG.save.data.cacheImages = true;
 
 		if (FlxG.save.data.editorBG == null)
 			FlxG.save.data.editor = false;

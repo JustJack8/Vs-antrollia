@@ -21,6 +21,8 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
 import flixel.addons.display.FlxBackdrop;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 
 #if windows
 import Discord.DiscordClient;
@@ -42,6 +44,9 @@ class FreeplayState extends MusicBeatState
 	var uh:Float = 0;
 	var oh:Float = 0;
 
+	var al:Float = 0;
+	var pha:Float = 0;
+
 	var scoreText:FlxText;
 	var comboText:FlxText;
 	var diffText:FlxText;
@@ -50,7 +55,9 @@ class FreeplayState extends MusicBeatState
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
 	var combo:String = '';
+	var thingy:String = '';
 	var backdrops:FlxBackdrop = new FlxBackdrop(Paths.image('test2'), 0.2, 0.2, true, true);
+	var backdrops2:FlxBackdrop = new FlxBackdrop(Paths.image('a'), 0.2, 0.2, true, true);
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -78,7 +85,12 @@ class FreeplayState extends MusicBeatState
 	override function create()
 	{
 		clean();
-		var initSonglist = CoolUtil.coolTextFile(Paths.txt('data/freeplaySonglist'));
+		if (FlxG.save.data.seenjevil)
+			thingy = 'freeplaySonglist';
+		else
+			thingy = 'freeplaySonglist2';
+
+		var initSonglist = CoolUtil.coolTextFile(Paths.txt('data/' + thingy));
 
 		//var diffList = "";
 
@@ -209,6 +221,11 @@ class FreeplayState extends MusicBeatState
 		backdrops.scrollFactor.set(0, 0.07);
 		backdrops.angle = 45;
 
+		add(backdrops2);
+		backdrops2.scrollFactor.set(0, 0.07);
+		backdrops2.alpha = 0;
+		backdrops2.angle = 45;
+
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
@@ -318,30 +335,43 @@ class FreeplayState extends MusicBeatState
 		switch (curSelected)
 		{
 			case 0:
-				oh = 0.7;
-				gay = true;
-			case 1:
-				oh = 1.5;
-				gay = false;
-			case 2:
+				backdrops.alpha = 1;
+				backdrops2.alpha =0;
 				oh = 2;
-				gay = true;
+			case 1:
+				backdrops.alpha = 1;
+				backdrops2.alpha =0;
+				oh = 3;
+			case 2:
+				backdrops.alpha = 1;
+				backdrops2.alpha =0;
+				oh = 4;
 			case 3:
-				oh = 3;
-				gay = false;
+				backdrops.alpha = 1;
+				backdrops2.alpha =0;
+				oh = 6.5;
 			case 4:
-				oh = 5;
-				gay = true;
-			case 5:
-				oh = 3;
-				gay = false;
-
+				backdrops.alpha = 0;
+				backdrops2.alpha =1;
+				if (!FlxG.save.data.seenjevil)
+					FlxG.sound.music.volume = 0;
+				oh = 10;
 		}
 
-		if (FlxG.sound.music.volume < 0.7)
-		{
-			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
-		}
+		if (!FlxG.save.data.seenjevil && curSelected != 4)
+			{
+				if (FlxG.sound.music.volume < 0.7)
+					{
+						FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
+					}
+			}
+		if (FlxG.save.data.seenjevil)
+			{
+				if (FlxG.sound.music.volume < 0.7)
+					{
+						FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
+					}
+			}
 
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, 0.4));
 
@@ -355,16 +385,21 @@ class FreeplayState extends MusicBeatState
 		{
 			FlxG.sound.music.volume -= 0.5 * FlxG.elapsed;
 		}
+		gay = false;
 
 		if (gay)
 			{
 				backdrops.x -= oh / (120 / 60);
 				backdrops.y -= oh / (120 / 60);
+				backdrops2.x -= oh / (120 / 60);
+				backdrops2.y -= oh / (120 / 60);
 			}
 			else
 				{
 					backdrops.x += oh / (120 / 60);
 					backdrops.y += oh / (120 / 60);
+					backdrops2.x += oh / (120 / 60);
+					backdrops2.y += oh / (120 / 60);
 				}
 
 		var upP = FlxG.keys.justPressed.UP;
@@ -409,38 +444,6 @@ class FreeplayState extends MusicBeatState
 		//if (FlxG.keys.justPressed.SPACE && !openedPreview)
 			//openSubState(new DiffOverview());
 
-		if (FlxG.keys.pressed.SHIFT)
-		{
-			if (FlxG.keys.justPressed.LEFT)
-			{
-				diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
-			}
-			if (FlxG.keys.justPressed.RIGHT)
-			{
-				diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
-			}
-
-			if (rate > 3)
-			{
-				rate = 3;
-				diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
-			}
-			else if (rate < 0.5)
-			{
-				rate = 0.5;
-				diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
-			}
-
-			previewtext.text = "Rate: " + rate + "x";
-		}
-		else
-		{
-			if (FlxG.keys.justPressed.LEFT)
-				changeDiff(-1);
-			if (FlxG.keys.justPressed.RIGHT)
-				changeDiff(1);
-		}
-		
 					
 		#if cpp
 		@:privateAccess
@@ -468,10 +471,15 @@ class FreeplayState extends MusicBeatState
 			{
 				hmm = songData.get(songs[curSelected].songName)[curDifficulty];
 				if (hmm == null)
-					return;
+					{
+						trace('fucked');
+						return;
+					}
+					
 			}
 			catch(ex)
 			{
+				trace('fucked');
 				return;
 			}
 
@@ -524,8 +532,26 @@ class FreeplayState extends MusicBeatState
 		intendedScore = Highscore.getScore(songHighscore, curDifficulty);
 		combo = Highscore.getCombo(songHighscore, curDifficulty);
 		#end
-		diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
-		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
+		if (curSelected == 4)
+			diffCalcText.text = 'RATING: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+		else
+			{
+				switch (curSelected)
+				{
+					case 0:
+						diffCalcText.text = 'RATING: 3';
+					case 1:
+						diffCalcText.text = 'RATING: 4.82';
+					case 2:
+						diffCalcText.text = 'RATING: 8.52';
+					case 3:
+						diffCalcText.text = 'RATING: 9.52';
+				}
+			}
+		if (curSelected == 4)
+			diffText.text = 'CHAOS';
+		else
+			diffText.text = 'TROLL';
 	}
 
 	function changeSelection(change:Int = 0)
@@ -536,9 +562,6 @@ class FreeplayState extends MusicBeatState
 
 		// NGio.logEvent('Fresh');
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-
-
-
 
 		curSelected += change;
 
@@ -576,8 +599,26 @@ class FreeplayState extends MusicBeatState
 		// lerpScore = 0;
 		#end
 
-		diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
-		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
+		if (curSelected == 4)
+			diffCalcText.text = 'RATING: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+		else
+			{
+				switch (curSelected)
+				{
+					case 0:
+						diffCalcText.text = 'RATING: 3';
+					case 1:
+						diffCalcText.text = 'RATING: 4.82';
+					case 2:
+						diffCalcText.text = 'RATING: 8.52';
+					case 3:
+						diffCalcText.text = 'RATING: 9.52';
+				}
+			}
+		if (curSelected == 4)
+			diffText.text = 'CHAOS';
+		else
+			diffText.text = 'TROLL';
 		
 		#if PRELOAD_ALL
 		if (songs[curSelected].songCharacter == "sm")

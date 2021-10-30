@@ -90,7 +90,7 @@ class Trophy extends MusicBeatState
 		FlxG.camera.follow(camFollow, null, 0 * (0 / FlxG.save.data.fpsCap));
 
 		if (FlxG.save.data.reconnected && FlxG.save.data.cbt && FlxG.save.data.explosion && FlxG.save.data.blood && FlxG.save.data.jevil && 
-			FlxG.save.data.kade && FlxG.save.data.hdwgh && placeholder && FlxG.save.data.totalmiss == 1000 && 
+			FlxG.save.data.kade && FlxG.save.data.hdwgh && FlxG.save.data.chungus && FlxG.save.data.totalmiss == 1000 && 
 			FlxG.save.data.death == 100 && FlxG.save.data.reconnectedfc && FlxG.save.data.cbtfc && FlxG.save.data.explosionfc && FlxG.save.data.bloodfc && FlxG.save.data.life == false)
 			{
 				FlxG.save.data.life = true;
@@ -156,7 +156,7 @@ class Trophy extends MusicBeatState
 		hdwgh.y += kade.y + 432 - 216;
 		menuItems.add(hdwgh);
 
-		if (placeholder)
+		if (FlxG.save.data.chungus)
 		chungus = new FlxSprite().loadGraphic(Paths.image('achivements/chungus'));
 		else
 		chungus = new FlxSprite().loadGraphic(Paths.image('achivements/chungusgray'));	

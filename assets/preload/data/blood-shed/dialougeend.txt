@@ -1,0 +1,28 @@
+:bg:imdead
+:stv:antlines/cough sorry sadspongebob
+:ant-devilish: I’m *cough* sorry I didn’t mean to do that.
+:stv:bflines/Line1
+:bf:Be- wait no, i’m sorry, I shouldn’t have hit you, it was in the heat of the moment.
+:stv:bflines/Line2
+:bf:It was really an accident, i’m so sorry.
+:stv:gflines/Sorry GF
+:gf:Yeah, sorry about that.
+:bgskip:imnotdead
+:lol:
+:stv:antlines/starving
+:ant-devilish:Well now that we’re cleared up, and we’re all friends again, i’m starving.
+:stv:antlines/wanna get food or something
+:ant-devilish:You guys wanna get food or something, Mc donalds?
+:stv:bflines/line3
+:bf:Fuck yeah!
+:stv:gflines/Yeah!
+:gf:Yeah!
+:bgskip:sunset
+:stv:gflines/gay
+:gf:Oh yeah how did you guys even meet anyways?
+:stv:antlines/Tell ya later
+:ant-devilish:Haha… We’ll tell you later.
+:stv:bflines/line4
+:bf:Y-yeah!
+:hide:
+:bg:BURGUR

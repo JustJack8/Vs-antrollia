@@ -384,6 +384,17 @@ class Stage
 						swagBacks['bg'] = bg;
                         toAdd.push(bg);
 					}
+				case 'sidehell':
+					{
+						camZoom = 0.5;
+						curStage = 'sidehell';
+						var bg1:FlxSprite = new FlxSprite(-640, -300).loadGraphic(Paths.image('sidewalk/bg1'));
+						bg1.antialiasing = true;
+						bg1.active = false;
+						bg1.scale.set(1.1, 1.1);
+						swagBacks['bg1'] = bg1;
+						toAdd.push(bg1);
+					}
 				default:
 					{
 						camZoom = 0.9;

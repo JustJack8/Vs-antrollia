@@ -81,7 +81,7 @@ class Jukebox extends MusicBeatState
 	override function create()
 	{
 		clean();
-		var initSonglist = CoolUtil.coolTextFile(Paths.txt('data/freeplaySonglist'));
+		var initSonglist = CoolUtil.coolTextFile(Paths.txt('data/juke'));
 
 		//var diffList = "";
 
@@ -253,7 +253,6 @@ class Jukebox extends MusicBeatState
 		//add(scoreText);
 
 		changeSelection();
-		changeDiff();
 
 		Conductor.songPosition = -5000;
 
@@ -405,26 +404,6 @@ class Jukebox extends MusicBeatState
 
 		if (FlxG.keys.pressed.SHIFT)
 		{
-			if (FlxG.keys.justPressed.LEFT)
-			{
-				diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
-			}
-			if (FlxG.keys.justPressed.RIGHT)
-			{
-				diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
-			}
-
-			if (rate > 3)
-			{
-				rate = 3;
-				diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
-			}
-			else if (rate < 0.5)
-			{
-				rate = 0.5;
-				diffCalcText.text = 'RATING: ${DiffCalc.CalculateDiff(songData.get(songs[curSelected].songName)[curDifficulty])}';
-			}
-
 			previewtext.text = "Rate: " + rate + "x";
 		}
 		else
@@ -538,15 +517,6 @@ class Jukebox extends MusicBeatState
 		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
 	
 
-		var hmm;
-			try
-			{
-				hmm = songData.get(songs[curSelected].songName)[curDifficulty];
-				if (hmm != null)
-					Conductor.changeBPM(hmm.bpm);
-			}
-			catch(ex)
-			{}
 
 		if (openedPreview)
 		{

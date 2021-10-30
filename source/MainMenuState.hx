@@ -28,6 +28,7 @@ using StringTools;
 class MainMenuState extends MusicBeatState
 {
 	var curSelected:Int = 0;
+	var gayfloat:Float = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	public var gay:Bool = false;
@@ -50,12 +51,14 @@ class MainMenuState extends MusicBeatState
 	public static var nightly:String = "";
 	var backdrops:FlxBackdrop = new FlxBackdrop(Paths.image('test'), 0.2, 0.2, true, true);
 
-	public static var kadeEngineVer:String = "1.7" + nightly;
+	public static var kadeEngineVer:String = "";
 	public static var gameVer:String = "0.2.7.1";
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	public static var finishedFunnyMove:Bool = false;
+	var lol:Bool = false;
+	var menua:String = "";
 
 	override function create()
 	{
@@ -65,13 +68,21 @@ class MainMenuState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 
+		if (FlxG.random.bool(1))
+			{
+				lol = true;
+			}
+
+		if (FlxG.sound.music.volume == 0 || !FlxG.sound.music.playing)
+			{
+				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			}
+		if (FlxG.save.data.blood)
+			menua = 'menu';
+		else
+			menua = 'gray';
+
 		FlxG.mouse.visible = false;
-
-		if (!FlxG.sound.music.playing)
-		{
-			FlxG.sound.playMusic(Paths.music('freakyMenu'));
-		}
-
 		persistentUpdate = persistentDraw = true;
 
 		var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('menuBG'));
@@ -105,7 +116,7 @@ class MainMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		var tex = Paths.getSparrowAtlas('menu');
+		var tex = Paths.getSparrowAtlas(menua);
 
 		for (i in 0...optionShit.length)
 		{
@@ -194,6 +205,7 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
@@ -272,17 +284,47 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-					selectedSomethin = true;
-					FlxG.sound.play(Paths.sound('confirmMenu'));
-					
-					if (FlxG.save.data.flashing)
-						FlxFlicker.flicker(magenta, 1.1, 0.15, false);
-
-						goToState();
+				if (FlxG.save.data.blood)
+					{
+						selectedSomethin = true;
+						FlxG.sound.play(Paths.sound('confirmMenu'));
+						
+						if (FlxG.save.data.flashing)
+							FlxFlicker.flicker(magenta, 1.1, 0.15, false);
+	
+							goToState();
+					}
+					else
+						{
+							switch (curSelected)
+							{
+								case 1:
+								case 5:
+								default:
+									selectedSomethin = true;
+									FlxG.sound.play(Paths.sound('confirmMenu'));
+									
+									if (FlxG.save.data.flashing)
+										FlxFlicker.flicker(magenta, 1.1, 0.15, false);
+				
+										goToState();
+							}
+						}
 			}
 		}
 
 		super.update(elapsed);
+
+		if (lol)
+			{
+				troll2.alpha =1;
+				troll.alpha =1;
+			}
+			else
+				{
+					troll2.alpha =0;
+					troll.alpha =0;
+				}
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
@@ -313,7 +355,14 @@ class MainMenuState extends MusicBeatState
 						FlxTween.tween(troll2,{"scale.x": 2,"scale.y": 2, angle: -360.0},1.5,{ease: FlxEase.expoInOut});
 			}});
 
-		new FlxTimer().start(1.7, function(tmr:FlxTimer)
+			if (lol)
+				{
+					gayfloat = 1.7;
+				}
+				else{
+					gayfloat = 0.5;
+				}
+		new FlxTimer().start(gayfloat, function(tmr:FlxTimer)
 			{
 				switch (daChoice)
 				{

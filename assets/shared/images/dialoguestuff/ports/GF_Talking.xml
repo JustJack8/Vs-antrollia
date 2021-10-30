@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="GF_Talking.png">
+	<!-- Created with Adobe Animate version 18.0.0.107 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="GF Talking0000" x="0" y="0" width="434" height="667" pivotX="40.5" pivotY="472.1"/>
+	<SubTexture name="GF Talking0001" x="0" y="0" width="434" height="667"/>
+	<SubTexture name="GF Talking0002" x="434" y="0" width="434" height="667"/>
+	<SubTexture name="GF Talking0003" x="0" y="667" width="434" height="667"/>
+	<SubTexture name="GF Talking0004" x="0" y="1334" width="434" height="667"/>
+	<SubTexture name="GF Talking0005" x="434" y="667" width="434" height="667"/>
+</TextureAtlas>

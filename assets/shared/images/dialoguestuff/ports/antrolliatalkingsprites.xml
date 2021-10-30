@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="antrolliatalkingsprites.png">
+	<!-- Created with Adobe Animate version 19.2.1.408 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="antrollia talk50000" x="0" y="0" width="455" height="669" frameX="-4" frameY="0" frameWidth="459" frameHeight="669"/>
+	<SubTexture name="antrollia talk50001" x="0" y="0" width="455" height="669" frameX="-4" frameY="0" frameWidth="459" frameHeight="669"/>
+	<SubTexture name="antrollia talk50002" x="455" y="0" width="455" height="669" frameX="-4" frameY="0" frameWidth="459" frameHeight="669"/>
+	<SubTexture name="antrollia talk50003" x="910" y="0" width="452" height="669" frameX="-7" frameY="0" frameWidth="459" frameHeight="669"/>
+	<SubTexture name="antrollia talk50004" x="1362" y="0" width="452" height="669" frameX="-7" frameY="0" frameWidth="459" frameHeight="669"/>
+	<SubTexture name="antrollia talk50005" x="1362" y="0" width="452" height="669" frameX="-7" frameY="0" frameWidth="459" frameHeight="669"/>
+	<SubTexture name="antrollia talk50006" x="1814" y="0" width="457" height="669" frameX="-2" frameY="0" frameWidth="459" frameHeight="669"/>
+	<SubTexture name="antrollia talk50007" x="1814" y="0" width="457" height="669" frameX="-2" frameY="0" frameWidth="459" frameHeight="669"/>
+	<SubTexture name="antrollia talk50008" x="2271" y="0" width="457" height="669" frameX="-2" frameY="0" frameWidth="459" frameHeight="669"/>
+	<SubTexture name="antrollia talk50009" x="2728" y="0" width="459" height="668" frameX="0" frameY="-1" frameWidth="459" frameHeight="669"/>
+	<SubTexture name="antrollia talk50010" x="3187" y="0" width="459" height="668" frameX="0" frameY="-1" frameWidth="459" frameHeight="669"/>
+	<SubTexture name="antrollia talk50011" x="3187" y="0" width="459" height="668" frameX="0" frameY="-1" frameWidth="459" frameHeight="669"/>
+	<SubTexture name="antrollia talk1 christ0000" x="0" y="669" width="463" height="667" frameX="-4" frameY="-1" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk1 christ0001" x="0" y="669" width="463" height="667" frameX="-4" frameY="-1" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk1 christ0002" x="463" y="669" width="463" height="667" frameX="-4" frameY="-1" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk1 christ0003" x="926" y="669" width="458" height="668" frameX="-9" frameY="0" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk1 christ0004" x="1384" y="669" width="458" height="668" frameX="-9" frameY="0" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk1 christ0005" x="1384" y="669" width="458" height="668" frameX="-9" frameY="0" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk1 christ0006" x="1842" y="669" width="462" height="667" frameX="-5" frameY="-1" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk1 christ0007" x="1842" y="669" width="462" height="667" frameX="-5" frameY="-1" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk1 christ0008" x="2304" y="669" width="462" height="667" frameX="-5" frameY="-1" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk1 christ0009" x="2766" y="669" width="467" height="666" frameX="0" frameY="-2" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk1 christ0010" x="3233" y="669" width="467" height="666" frameX="0" frameY="-2" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk1 christ0011" x="3233" y="669" width="467" height="666" frameX="0" frameY="-2" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk2 encoraged-devilish0000" x="0" y="1337" width="455" height="669" frameX="-1" frameY="0" frameWidth="456" frameHeight="669"/>
+	<SubTexture name="antrollia talk2 encoraged-devilish0001" x="0" y="1337" width="455" height="669" frameX="-1" frameY="0" frameWidth="456" frameHeight="669"/>
+	<SubTexture name="antrollia talk2 encoraged-devilish0002" x="455" y="1337" width="455" height="669" frameX="-1" frameY="0" frameWidth="456" frameHeight="669"/>
+	<SubTexture name="antrollia talk2 encoraged-devilish0003" x="910" y="1337" width="452" height="669" frameX="-4" frameY="0" frameWidth="456" frameHeight="669"/>
+	<SubTexture name="antrollia talk2 encoraged-devilish0004" x="1362" y="1337" width="452" height="669" frameX="-4" frameY="0" frameWidth="456" frameHeight="669"/>
+	<SubTexture name="antrollia talk2 encoraged-devilish0005" x="1362" y="1337" width="452" height="669" frameX="-4" frameY="0" frameWidth="456" frameHeight="669"/>
+	<SubTexture name="antrollia talk2 encoraged-devilish0006" x="1814" y="1337" width="455" height="669" frameX="-1" frameY="0" frameWidth="456" frameHeight="669"/>
+	<SubTexture name="antrollia talk2 encoraged-devilish0007" x="1814" y="1337" width="455" height="669" frameX="-1" frameY="0" frameWidth="456" frameHeight="669"/>
+	<SubTexture name="antrollia talk2 encoraged-devilish0008" x="2269" y="1337" width="455" height="669" frameX="-1" frameY="0" frameWidth="456" frameHeight="669"/>
+	<SubTexture name="antrollia talk2 encoraged-devilish0009" x="2724" y="1337" width="456" height="669"/>
+	<SubTexture name="antrollia talk2 encoraged-devilish0010" x="3180" y="1337" width="456" height="669"/>
+	<SubTexture name="antrollia talk2 encoraged-devilish0011" x="3180" y="1337" width="456" height="669"/>
+	<SubTexture name="antrollia talk3 tired0000" x="0" y="2006" width="463" height="667" frameX="-4" frameY="-1" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk3 tired0001" x="0" y="2006" width="463" height="667" frameX="-4" frameY="-1" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk3 tired0002" x="463" y="2006" width="463" height="667" frameX="-4" frameY="-1" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk3 tired0003" x="926" y="2006" width="458" height="668" frameX="-9" frameY="0" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk3 tired0004" x="1384" y="2006" width="458" height="668" frameX="-9" frameY="0" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk3 tired0005" x="1384" y="2006" width="458" height="668" frameX="-9" frameY="0" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk3 tired0006" x="1842" y="2006" width="462" height="667" frameX="-5" frameY="-1" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk3 tired0007" x="1842" y="2006" width="462" height="667" frameX="-5" frameY="-1" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk3 tired0008" x="2304" y="2006" width="462" height="667" frameX="-5" frameY="-1" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk3 tired0009" x="2766" y="2006" width="467" height="666" frameX="0" frameY="-2" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk3 tired0010" x="3233" y="2006" width="467" height="666" frameX="0" frameY="-2" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk3 tired0011" x="3233" y="2006" width="467" height="666" frameX="0" frameY="-2" frameWidth="467" frameHeight="668"/>
+	<SubTexture name="antrollia talk4 wah0000" x="0" y="2674" width="455" height="669"/>
+	<SubTexture name="antrollia talk4 wah0001" x="0" y="2674" width="455" height="669"/>
+	<SubTexture name="antrollia talk4 wah0002" x="0" y="2674" width="455" height="669"/>
+</TextureAtlas>

@@ -9,6 +9,7 @@ import openfl.Lib;
 import Conductor.BPMChangeEvent;
 import flixel.FlxG;
 import flixel.addons.ui.FlxUIState;
+import openfl.filters.ShaderFilter;
 
 class MusicBeatState extends FlxUIState
 {
@@ -42,6 +43,15 @@ class MusicBeatState extends FlxUIState
 			}
 		}
 	}
+
+	
+	public var coolcromaeffect(get, never):ShaderFilter;
+	
+	inline function get_coolcromaeffect():ShaderFilter
+		return Lehandeler.coolcromaeffect;
+
+	public function setChrome(lolz:Float):Void
+		Lehandeler.setChrome(lolz);
 
 	override function create()
 	{

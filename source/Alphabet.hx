@@ -24,6 +24,10 @@ class Alphabet extends FlxSpriteGroup
 	public var targetY:Float = 0;
 	public var isMenuItem:Bool = false;
 	public var isextra:Bool = false;
+	public var isname:Bool = false;
+	public var istext1:Bool = false;
+	public var istext2:Bool = false;
+	public var istext3:Bool = false;
 
 	public var text:String = "";
 
@@ -287,6 +291,30 @@ class Alphabet extends FlxSpriteGroup
 				y = FlxMath.lerp(y, (scaledY * 120) + (FlxG.height * 0.48), 0.30);
 				screenCenter(X);
 			}
+		if (isname)
+			{
+				screenCenter();
+				x += 340;
+				y -= 225;
+			}
+		if (istext1)
+			{
+				screenCenter(Y);
+				x = 10;
+				y -= 60;
+			}
+		if (istext2)
+			{
+				screenCenter(Y);
+				x = 10;
+				y += 60;
+			}
+		if (istext3)
+			{
+				screenCenter(Y);
+				x = 10;
+				y += 180;
+			}
 
 		super.update(elapsed);
 	}
@@ -324,7 +352,7 @@ class Alphabet extends FlxSpriteGroup
 
 class AlphaCharacter extends FlxSprite
 {
-	public static var alphabet:String = "abcdefghijklmnopqrstuvwxyz";
+	public static var alphabet:String = "abcdefghijklmnopqrstuvwxyz;";
 
 	public static var numbers:String = "1234567890";
 

@@ -1,0 +1,47 @@
+:bg:bfandgf
+:bg:BONK
+:stv:antlines/watch where
+:ant-talk:Watch where your go-
+:bf:beep!
+:bgskip:antrolliaoh
+:stv:antlines/Blue Balls
+:ant-talk:Blue Balls?
+:bgskip:goodbuddies
+:stv:antlines/where ya been
+:ant-talk:Blue balls it’s been so long! Where have you been?
+:stv:gflines/Um BF
+:gf:Boyfriend, you know this lady?
+:bf:Bep skedi bop!
+:bgskip:aaa
+:stv:antlines/explains
+:ant-talk:Well that explains why you haven’t been around, you got a girlfriend!
+:stv:antlines/lucky ladies name
+:ant-talk:Now whats the lucky lady’s name?
+:bf:Bep skdiop beep bo!
+:stv:antlines/girlfriend.
+:ant-talk:Girlfriend?
+:stv:antlines/interesting name
+:ant-talk:Interesting name but I like it! 
+:stv:antlines/might as well
+:ant-talk:Well I might as well introduce myself!
+:bgskip:thegirls
+:stv:antlines/i'm antrollia
+:ant-talk:I’m Antrollia, and I do a little trolling.
+:stv:gflines/nice to meet you
+:gf:Well it’s nice to meet you Antrollia.
+:stv:antlines/same to you gf
+:ant-talk:Same to you Girlfriend!
+:stv:antlines/now
+:ant-talk:Now…
+:bgskip:antrolliaexcited
+:stv:antlines/lil rap battle
+:ant-talk:How about a little rap battle for old times sake?
+:bgskip:bfexcited
+:bf:Bep bop skedi bup! 
+:bgskip:facetoface
+:stv:antlines/alright lets do this
+:ant-talk:Alright lets do this!
+
+
+
+

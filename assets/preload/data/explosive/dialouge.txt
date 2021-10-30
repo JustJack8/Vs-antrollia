@@ -1,0 +1,9 @@
+:bgskip:nothin
+:stv:antlines/Wow you
+:ant-devilish:Huh wow that was really good! you really improved at your singing thing since we last talked
+:bf:Beep!
+:stv:antlines/how about we try out
+:ant-talk: how about we try out one of the songs we used to sing?
+:bf:Bep bop skedi bup! 
+:stv:antlines/lets make this explosive
+:ant-talk:Lets make this explosive! 

@@ -82,6 +82,10 @@ class Caching extends MusicBeatState
 
 		FlxGraphic.defaultPersist = FlxG.save.data.cacheImages;
 
+		#if debug
+		FlxG.save.data.cacheImages = false;
+		#end
+
 		#if cpp
 		if (FlxG.save.data.cacheImages)
 		{
@@ -93,6 +97,30 @@ class Caching extends MusicBeatState
 					continue;
 				images.push(i);
 			}
+			for (a in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/bullets")))
+				{
+					if (!a.endsWith(".png"))
+						continue;
+					images.push(a);
+				}
+			for (b in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/effecticons")))
+				{
+					if (!b.endsWith(".png"))
+						continue;
+					images.push(b);
+				}
+			for (c in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/effecticons")))
+				{
+					if (!c.endsWith(".png"))
+						continue;
+					images.push(c);
+				}
+			for (d in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/sidewalk")))
+				{
+					if (!d.endsWith(".png"))
+						continue;
+					images.push(d);
+				}
 		}
 
 		trace("caching music...");

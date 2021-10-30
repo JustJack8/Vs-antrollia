@@ -9,6 +9,8 @@ import flixel.FlxSprite;
 import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import Random;
+import flixel.text.FlxText;
 
 class GameOverSubstate extends MusicBeatSubstate
 {
@@ -16,7 +18,11 @@ class GameOverSubstate extends MusicBeatSubstate
 	var camFollow:FlxObject;
 
 	var stageSuffix:String = "";
-
+	var sus:String = "";
+	var numba:Int = 0;
+	var isallowed:Bool = true;
+	var e:Bool = true;
+	var deaths:FlxText;
 
 	public function new(x:Float, y:Float)
 	{
@@ -39,7 +45,20 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		if (FlxG.save.data.death == 100)
 			{
-				trophygot();
+				numba = 1;
+			}
+		else if (FlxG.random.bool(10))
+			{
+				switch(Random.int(1, 4)) {
+					case 1:
+						numba =2;
+					case 2:
+						numba =3;
+					case 3:
+						numba =10;
+					case 4:
+						numba =69;
+					}
 			}
 
 		bf = new Boyfriend(x, y, daBf);
@@ -50,6 +69,8 @@ class GameOverSubstate extends MusicBeatSubstate
 		add(camFollow);
 
 		FlxG.sound.play(Paths.sound('fnf_loss_sfx' + stageSuffix));
+
+		
 		Conductor.changeBPM(100);
 
 		// FlxG.camera.followLerp = 1;
@@ -58,6 +79,19 @@ class GameOverSubstate extends MusicBeatSubstate
 		FlxG.camera.target = null;
 
 		bf.playAnim('firstDeath');
+
+		switch (numba)
+		{
+			case 10:
+				stageSuffix = 'tdm';
+		}
+
+		deaths = new FlxText(20, 20, Std.int(FlxG.width * 0.6), 'total deaths:' + FlxG.save.data.death, 20);
+		deaths.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
+		deaths.alpha = 0;
+		deaths.x = bf.x - 400;
+		deaths.y = bf.y - 50;
+		add(deaths);
 	}
 
 	var startVibin:Bool = false;
@@ -66,7 +100,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	{
 		super.update(elapsed);
 
-		if (controls.ACCEPT)
+		if (controls.ACCEPT && isallowed)
 		{
 			endBullshit();
 		}
@@ -94,45 +128,84 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
 		{
+			FlxTween.tween(deaths,{alpha: 1},2.5,{ease: FlxEase.expoInOut});
+
 			FlxTween.tween(FlxG.camera, {zoom: 1.4}, 2.5, {
 				ease: FlxEase.quadInOut});
-			//pretty sloppy way of adding the death quotes, unless shadow wants to make it better
-			FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
+
+			if (numba == 0)
+				FlxG.sound.play(Paths.soundRandom('DeathQuote', 1, 28), 1);
+			switch (numba)
+			{
+				case 1:
+					FlxG.sound.play(Paths.sound('eastereggs/amazing'));
+					Conductor.songPosition = FlxG.sound.music.time;
+					FlxG.sound.music.volume = 0;
+					isallowed = false;
+					new FlxTimer().start(12, function(tmr:FlxTimer)
+						{
+							isallowed = true;
+							Conductor.songPosition = FlxG.sound.music.time;
+						},1);
+				case 2:
+					FlxG.sound.play(Paths.sound('eastereggs/TABILOL'));
+					isallowed = false;
+					Conductor.songPosition = FlxG.sound.music.time;
+					FlxG.sound.music.volume = 0;
+					new FlxTimer().start(12, function(tmr:FlxTimer)
+						{
+							isallowed = true;
+							Conductor.songPosition = FlxG.sound.music.time;
+						},1);
+				case 3:
+					FlxG.sound.play(Paths.sound('eastereggs/BEST_LINE'));
+					isallowed = false;
+					Conductor.songPosition = FlxG.sound.music.time;
+					FlxG.sound.music.volume = 0;
+					new FlxTimer().start(68.5, function(tmr:FlxTimer)
+						{
+							isallowed = true;
+							Conductor.songPosition = FlxG.sound.music.time;
+						},1);
+				case 10:
+					stageSuffix = 'tdm';
+					FlxG.sound.play(Paths.sound('eastereggs/gfmod'));
+			}
+
+			if (numba == 69)
+				FlxG.sound.playMusic(Paths.music('sus'));
+			else
+				FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
 			startVibin = true;
-			FlxG.sound.play(Paths.soundRandom('DeathQuote', 1, 28), FlxG.random.float(0.1, 0.2));
+			if (e)
+				{
+					bf.playAnim('deathLoop', true);
+					e = false;
+				}
+				
 		}
 
-		if (FlxG.sound.music.playing)
-		{
-			Conductor.songPosition = FlxG.sound.music.time;
-			FlxG.sound.music.volume = 0.4;
-		}
+		if (!isallowed)
+			{
+				FlxG.sound.music.volume = 0;
+			}
+			else
+				{
+					FlxG.sound.music.volume = 0.7;
+				}
 
+		Conductor.songPosition = FlxG.sound.music.time;
 	}
 
 	override function beatHit()
 	{
 		super.beatHit();
 
-		if (startVibin && !isEnding)
-		{
-			bf.playAnim('deathLoop', true);
-		}
+
 		FlxG.log.add('beat');
 	}
 
 	var isEnding:Bool = false;
-
-	function trophygot() {
-		var got:FlxSprite = new FlxSprite(-600,10).loadGraphic(Paths.image('unlocked'));
-		add(got);
-		FlxTween.tween(got,{x: 10},1);
-		FlxG.sound.play(Paths.sound('levelup'));
-		new FlxTimer().start(1.5, function(tmr:FlxTimer)
-			{
-				FlxTween.tween(got,{x: -600},1);
-			});
-	}
 
 	function endBullshit():Void
 	{
@@ -142,7 +215,11 @@ class GameOverSubstate extends MusicBeatSubstate
 			isEnding = true;
 			bf.playAnim('deathConfirm', true);
 			FlxG.sound.music.stop();
-			FlxG.sound.play(Paths.music('gameOverEnd' + stageSuffix));
+			if (numba == 69)
+				FlxG.sound.play(Paths.music('susend'));
+			else
+				FlxG.sound.play(Paths.music('gameOverEnd'));
+			
 			new FlxTimer().start(0.7, function(tmr:FlxTimer)
 			{
 				FlxG.camera.fade(FlxColor.BLACK, 2, false, function()
