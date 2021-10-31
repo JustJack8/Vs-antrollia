@@ -112,6 +112,7 @@ class PlayState extends MusicBeatState
 
 	var seentnt:Bool = false;
 	var swagNote:Note;
+	var colorTween:FlxTween;
 
 	public static var SONG:SwagSong;
 	public static var isStoryMode:Bool = false;
@@ -127,6 +128,7 @@ class PlayState extends MusicBeatState
 
 	var xnumber:Int = 0;
 	var isx:Bool = false;
+	var doshader:Bool = false;
 	var chromnumber:Float = 0;
 	var cantshake:Bool = false;
 
@@ -410,6 +412,8 @@ class PlayState extends MusicBeatState
 
 	public var executeModchart = false;
 
+	var alreadyskip = false;
+
 	var blackblind:FlxSprite;
 
 	var redeffect:FlxSprite;
@@ -469,6 +473,7 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
 		FlxG.mouse.visible = false;
+		alreadyskip = false;
 		instance = this;
 
 		if (FlxG.save.data.fpsCap > 290)
@@ -612,14 +617,10 @@ class PlayState extends MusicBeatState
 		camGame.filtersEnabled = true;
 		camdr.filtersEnabled = true;
 		camHUD.filtersEnabled = true;
-
 		filtershit.push(coolcromaeffect);
 
 		camHUD.zoom = PlayStateChangeables.zoom;
-		wiggleShit.effectType = WiggleEffectType.DREAMY;
-		wiggleShit.waveAmplitude = 0.01;
-		wiggleShit.waveFrequency = 60;
-		wiggleShit.waveSpeed = 0.8;
+		
 
 		FlxCamera.defaultCameras = [camGame];
 
@@ -1577,6 +1578,8 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 		healthBarBG.x = healthBar.x;
 		healthBarBG.y = healthBar.y;
+		healthBar.shader = wiggleShit.shader;
+		healthBarBG.shader = wiggleShit.shader;
 		if (songLowercase == 'exptrollgation')
 			{
 				healthBar.flipX = true;
@@ -1642,10 +1645,12 @@ class PlayState extends MusicBeatState
 
 		iconP1 = new HealthIcon(boyfriend.curCharacter, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
+		iconP1.shader = wiggleShit.shader;
 		add(iconP1);
 
 		iconP2 = new HealthIcon(dad.curCharacter, false);
 		iconP2.y = healthBar.y - (iconP2.height / 2);
+		iconP2.shader = wiggleShit.shader;
 		add(iconP2);
 
 		strumLineNotes.cameras = [camHUD];
@@ -2479,6 +2484,7 @@ class PlayState extends MusicBeatState
 
 				swagNote.sustainLength = TimingStruct.getTimeFromBeat((TimingStruct.getBeatFromTime(songNotes[2])));
 				swagNote.scrollFactor.set(0, 0);
+				swagNote.shader = wiggleShit.shader;
 
 				var susLength:Float = swagNote.sustainLength;
 
@@ -2901,7 +2907,7 @@ class PlayState extends MusicBeatState
 					// so no reason to delete it at all
 					if (notes.length == 0 && FlxG.sound.music.length - Conductor.songPosition <= 100)
 					{
-						checkfortrophy();
+						//checkfortrophy();
 					}
 				}
 			}
@@ -3719,6 +3725,18 @@ class PlayState extends MusicBeatState
 			if (!usedTimeTravel) 
 			{
 
+				switch (songLowercase)
+				{
+					case 'reconnected':
+						SONG.speed = 1.6;
+					case 'explosive':
+						SONG.speed = 2;
+					case 'cbt':
+						SONG.speed = 2.5;
+					case 'blood-shed':
+						SONG.speed = 3;
+				}
+
 				if (spadetimer != null)
 					spadetimer.active = false;
 				if (scythetimer != null)
@@ -3751,7 +3769,15 @@ class PlayState extends MusicBeatState
 						}
 						else
 							{
-								openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+								if (FlxG.random.bool(5))
+									{
+										FlxG.camera.zoom = 0.8;
+										openSubState(new GameOverut(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+									}
+									else
+										{
+											openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+										}
 							}
 						
 					
@@ -3835,6 +3861,18 @@ class PlayState extends MusicBeatState
 			if (FlxG.keys.justPressed.R)
 			{
 
+				switch (songLowercase)
+				{
+					case 'reconnected':
+						SONG.speed = 1.6;
+					case 'explosive':
+						SONG.speed = 2;
+					case 'cbt':
+						SONG.speed = 2.5;
+					case 'blood-shed':
+						SONG.speed = 3;
+				}
+
 				if (spadetimer != null)
 					spadetimer.active = false;
 				if (scythetimer != null)
@@ -3865,7 +3903,15 @@ class PlayState extends MusicBeatState
 						}
 						else
 							{
-								openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+								if (FlxG.random.bool(5))
+									{
+										FlxG.camera.zoom = 0.8;
+										openSubState(new GameOverut(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+									}
+									else
+										{
+											openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+										}
 							}
 				}
 
@@ -4417,6 +4463,21 @@ class PlayState extends MusicBeatState
 					gaytext.alpha = 0;
 			}
 			
+		if (doshader)
+			{
+				wiggleShit.effectType = WiggleEffectType.DREAMY;
+				wiggleShit.waveAmplitude = 0.01;
+				wiggleShit.waveFrequency = 60;
+				wiggleShit.waveSpeed = 2;
+			}
+			else
+				{
+					wiggleShit.effectType = null;
+					wiggleShit.waveAmplitude = 0;
+					wiggleShit.waveFrequency = 0;
+					wiggleShit.waveSpeed = 0;
+				}
+
 		super.update(elapsed);
 
 		aaa += 0.01;
@@ -4705,27 +4766,31 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					storyPlaylist.remove(storyPlaylist[0]);
-					var songFormat = StringTools.replace(PlayState.storyPlaylist[0], " ", "-");
-					switch (songFormat)
-					{
-						case 'Dad-Battle':
-							songFormat = 'Dadbattle';
-						case 'Philly-Nice':
-							songFormat = 'Philly';
-					}
-
-					var poop:String = Highscore.formatSong(songFormat, storyDifficulty);
-					FlxTransitionableState.skipNextTransIn = true;
-					FlxTransitionableState.skipNextTransOut = true;
-					prevCamFollow = camFollow;
-
-					PlayState.SONG = Song.conversionChecks(Song.loadFromJson(poop, PlayState.storyPlaylist[0]));
-					FlxG.sound.music.stop();
-					dia = true;
-
-					LoadingState.loadAndSwitchState(new PlayState());
-					clean();
+					if (!alreadyskip)
+						{
+							alreadyskip = true;
+							storyPlaylist.remove(storyPlaylist[0]);
+							var songFormat = StringTools.replace(PlayState.storyPlaylist[0], " ", "-");
+							switch (songFormat)
+							{
+								case 'Dad-Battle':
+									songFormat = 'Dadbattle';
+								case 'Philly-Nice':
+									songFormat = 'Philly';
+							}
+		
+							var poop:String = Highscore.formatSong(songFormat, storyDifficulty);
+							FlxTransitionableState.skipNextTransIn = false;
+							FlxTransitionableState.skipNextTransOut = false;
+							prevCamFollow = camFollow;
+		
+							PlayState.SONG = Song.conversionChecks(Song.loadFromJson(poop, PlayState.storyPlaylist[0]));
+							FlxG.sound.music.stop();
+							dia = true;
+		
+							LoadingState.loadAndSwitchState(new PlayState());
+							clean();
+						}
 				}
 			}
 			else
@@ -5819,20 +5884,12 @@ class PlayState extends MusicBeatState
 			else{
 				emitterblind.alpha.set(1, 1, 1, 0.5);
 				blindicon.alpha =1;
-				playerStrums.forEach(function(spr:StaticArrow)
-					{
-						spr.shader = wiggleShit.shader;
-					});
-				
+				doshader = true;
 				blindtimer = new FlxTimer().start(8, function(tmr:FlxTimer)
 					{
 						emitterblind.alpha.set(0, 0, 0, 0);
 						blindicon.alpha =0;
-						playerStrums.forEach(function(spr:StaticArrow)
-							{
-								spr.shader = null;
-							});
-						
+						doshader = false;
 					},1);
 			}
             case 2://posion
@@ -6373,7 +6430,7 @@ class PlayState extends MusicBeatState
 			}
 		if (songLowercase == 'exptrollgation' && curStep == 1408)
 			{
-				FlxG.camera.flash(FlxColor.WHITE, 1);
+				FlxG.camera.flash(FlxColor.WHITE, 3);
 				chromnumber = 0.0;
 				btnt.alpha = 0;
 				btnt2.alpha = 0;
@@ -6860,7 +6917,7 @@ class PlayState extends MusicBeatState
 		if (canhurt)
 			{
 				FlxG.sound.play(Paths.sound('hurt'));
-				healthdr -= 15;
+				healthdr -= 10;
 				ball.animation.play('ouch');
 				FlxFlicker.flicker(ball, 1.8, 0.1, true);
 				new FlxTimer().start(1.8, function(tmr:FlxTimer)
@@ -7227,7 +7284,7 @@ class PlayState extends MusicBeatState
 				FlxTween.angle(ball, -360, 360, 1.5, {ease: FlxEase.expoInOut});
 				new FlxTimer().start(1.5, function(tmr:FlxTimer)
 					{
-						hptxt = new FlxText(ball.x + 30, ball.y - 30, Std.int(FlxG.width * 0.6), "+30", 20);
+						hptxt = new FlxText(ball.x + 30, ball.y - 30, Std.int(FlxG.width * 0.6), "+20", 20);
 						hptxt.cameras = [camdr];
 						hptxt.setFormat(Paths.font("deltarune-hp-font.ttf"), 20);
 						add(hptxt);
@@ -7236,7 +7293,7 @@ class PlayState extends MusicBeatState
 						hptxt.velocity.x += FlxG.random.int(0, 10);
 						hptxt.color = FlxColor.GREEN;
 						FlxTween.tween(hptxt,{alpha: 0},1,{ease: FlxEase.expoInOut});
-						healthdr += 30;
+						healthdr += 20;
 						new FlxTimer().start(0.5, function(tmr:FlxTimer)
 							{
 								drbombtime();

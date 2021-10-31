@@ -12,13 +12,16 @@ import flixel.tweens.FlxTween;
 import flixel.addons.text.FlxTypeText;
 import flixel.text.FlxText;
 
-class GameOverdr extends MusicBeatSubstate
+class GameOverut extends MusicBeatSubstate
 {
 	var camFollow:FlxObject;
 
 	var stageSuffix:String = "";
 
 	var gg:FlxSprite;
+	var ut1:FlxSprite;
+	var ut2:FlxSprite;
+	var ut3:FlxSprite;
 
 	var lol:FlxTypeText;
 
@@ -35,7 +38,7 @@ class GameOverdr extends MusicBeatSubstate
 		Conductor.changeBPM(100);
 
 		var tex:flixel.graphics.frames.FlxAtlasFrames = Paths.getSparrowAtlas('balls_lo', 'shared');
-		bf = new FlxSprite(x - 363, y - 84);
+		bf = new FlxSprite(x - 270, y + 75);
 		bf.frames = tex;
 		bf.updateHitbox();
 		bf.animation.addByPrefix('lmfao', 'dusty when they when they', 24, false);
@@ -49,38 +52,40 @@ class GameOverdr extends MusicBeatSubstate
 
 	override function create() {
 
-		gg = new FlxSprite().loadGraphic(Paths.image('gameover'));
+		/*gg = new FlxSprite().loadGraphic(Paths.image('gameover'));
 		gg.antialiasing = false;
 		gg.alpha = 0;
 		gg.scale.set(1.3,1.3);
 		gg.screenCenter();
-		add(gg);
+		add(gg);*/
 
 		add(bf);
 		bf.animation.play('lmfao');
+		ut1 = new FlxSprite().loadGraphic(Paths.image('dialoguestuff/ut1'));
+		ut1.antialiasing = false;
+		ut1.screenCenter();
+		ut1.alpha =0;
+		add(ut1);
+
+		ut2 = new FlxSprite().loadGraphic(Paths.image('dialoguestuff/ut2'));
+		ut2.antialiasing = false;
+		ut2.alpha =0;
+		ut2.screenCenter();
+		add(ut2);
+
+		ut3 = new FlxSprite().loadGraphic(Paths.image('dialoguestuff/ut3'));
+		ut3.antialiasing = false;
+		ut3.screenCenter();
+		ut3.alpha =0;
+		add(ut3);
 		
-		switch(Random.int(1, 7)) {
-			case 1:
-				textlmao = 'i can do anything BITCH';
-			case 2:
-				textlmao = 'get FUCKED blue balls!';
-			case 3:
-				textlmao = 'give us your balls';
-			case 4:
-				textlmao = 'dodge using the keys BLUEBALLS';
-			case 5:
-				textlmao = 'spamton that, spamton this, stfu jevillia better';
-			case 6:
-				textlmao = 'Trolling Trolling!';
-			case 7:
-				textlmao = 'Bye byeeeeeee';
-		}
+		textlmao = 'GEEEEEETTTTT DUNKED ON!';
 
 		lol = new FlxTypeText(0, 0, Std.int(FlxG.width), "* " + textlmao, 32);
 		lol.screenCenter();
 		lol.updateHitbox();
-		lol.x += 250;
-		lol.y += 100;
+		lol.y += 200;
+		lol.x += 350;
 		lol.setFormat(Paths.font("COMIC.TTF"), 45);
 		lol.color = FlxColor.WHITE;
 		lol.sounds = [FlxG.sound.load(Paths.sound('antrollia_dialouge_sound_incase_we_dont_have_real_voices'), 0.7)];
@@ -106,7 +111,7 @@ class GameOverdr extends MusicBeatSubstate
 			PlayState.loadRep = false;
 		}
 
-		if (bf.animation.curAnim.name == 'lmfao' && bf.animation.curAnim.curFrame == 9)
+	if (bf.animation.curAnim.name == 'lmfao' && bf.animation.curAnim.curFrame == 9)
 		{
 			FlxG.sound.play(Paths.sound('break1'));
 		}
@@ -119,13 +124,32 @@ class GameOverdr extends MusicBeatSubstate
 		if (bf.animation.curAnim.name == 'lmfao' && bf.animation.curAnim.curFrame == 74)
 		{
 			bf.alpha = 0;
-			FlxTween.tween(gg,{alpha: 1},3,{ease: FlxEase.expoInOut});
 			FlxG.sound.playMusic(Paths.music('homo'));
-			new FlxTimer().start(2.5, function(tmr:FlxTimer)
-				{
-					lol.start(0.06, true);
-					startVibin = true;
-				},1);
+			lol.start(0.06, true);
+			ut1.alpha =1;
+			lol.completeCallback = function() {
+				new FlxTimer().start(2, function(tmr:FlxTimer)
+					{
+						ut1.alpha = 0;
+						lol.alpha =0;
+						new FlxTimer().start(3, function(tmr:FlxTimer)
+							{
+								ut2.alpha = 1;
+								lol.alpha =1;
+								lol.resetText('If we are really friends.');
+								lol.start(0.06, true);
+									new FlxTimer().start(3, function(tmr:FlxTimer)
+										{
+											ut3.alpha = 1;
+											lol.alpha =1;
+											ut2.alpha = 0;
+											lol.resetText('* You will come back.');
+											lol.start(0.06, true);
+											startVibin = true;
+										},1);
+							},1);
+					},1);
+			};
 			
 		}
 

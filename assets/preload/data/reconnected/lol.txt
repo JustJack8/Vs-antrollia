@@ -42,7 +42,7 @@
 :stv:antlines/alright lets do this
 :ant-talk:Alright lets do this!
 :bgskip:anime
-:stv:antlines/alright lets do this
+:stv:antlines/hi chat
 :ant-talk:Oh and, hi chat.
 
 

@@ -90,7 +90,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		deaths.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
 		deaths.alpha = 0;
 		deaths.x = bf.x - 400;
-		deaths.y = bf.y - 50;
+		deaths.y = bf.y - 40;
 		add(deaths);
 	}
 

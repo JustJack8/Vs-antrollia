@@ -31,6 +31,7 @@ class PauseSubState extends MusicBeatSubstate
 	var perSongOffset:FlxText;
 	
 	var offsetChanged:Bool = false;
+	var cuumtimer:FlxTimer;
 
 	public function new(x:Float, y:Float)
 	{
@@ -48,10 +49,11 @@ class PauseSubState extends MusicBeatSubstate
 		pauseMusic.volume = 0;
 		pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
 
-		new FlxTimer().start(60, function(timer:FlxTimer)
+		cuumtimer = new FlxTimer().start(60, function(timer:FlxTimer)
 			{
-				//FlxG.sound.play(Paths.sound('unpause_now_lol'), 0.8);
+				FlxG.sound.play(Paths.sound('unpause_now_lol'), 0.8);
 			});
+		cuumtimer.active = true;
 
 		FlxG.sound.list.add(pauseMusic);
 
@@ -68,7 +70,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(levelInfo);
 
 		var levelDifficulty:FlxText = new FlxText(20, 15 + 32, 0, "", 32);
-		levelDifficulty.text += CoolUtil.difficultyFromInt(PlayState.storyDifficulty).toUpperCase();
+		levelDifficulty.text += 'TROLL';
 		levelDifficulty.scrollFactor.set();
 		levelDifficulty.setFormat(Paths.font('vcr.ttf'), 32);
 		levelDifficulty.updateHitbox();
@@ -222,6 +224,7 @@ class PauseSubState extends MusicBeatSubstate
 			{
 				case "Resume":
 					close();
+					cuumtimer.active = false;
 				case "Restart Song":
 					PlayState.startTime = 0;
 					if (PlayState.instance.useVideo)
@@ -232,7 +235,9 @@ class PauseSubState extends MusicBeatSubstate
 					}
 					PlayState.instance.clean();
 					FlxG.resetState();
+					cuumtimer.active = false;
 				case "Exit to menu":
+					cuumtimer.active = false;
 					PlayState.startTime = 0;
 					if (PlayState.instance.useVideo)
 					{

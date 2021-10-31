@@ -8,5 +8,4 @@
 	<SubTexture name="explosion0003" x="1262" y="0" width="474" height="383" frameX="-32" frameY="-32" frameWidth="538" frameHeight="427"/>
 	<SubTexture name="explosion0004" x="0" y="413" width="506" height="403" frameX="-16" frameY="-17" frameWidth="538" frameHeight="427"/>
 	<SubTexture name="explosion0005" x="536" y="413" width="538" height="427"/>
-	<SubTexture name="explosion0006" x="1104" y="413" width="0" height="0" frameX="332" frameY="301" frameWidth="538" frameHeight="427"/>
 </TextureAtlas>

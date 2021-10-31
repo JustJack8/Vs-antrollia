@@ -10,6 +10,7 @@ import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
+import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileSquare;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup;
@@ -148,8 +149,9 @@ class TitleState extends MusicBeatState
 		gfDance.y -= 500;
 		gfDance.x -= 380;
 		gfDance.scale.set(0.5,0.5);
-		gfDance.animation.addByPrefix('idle', "Antrollia Title Screen", 16, false);
+		gfDance.animation.addByPrefix('idle', "Antrollia Title Screen", 16);
 		gfDance.antialiasing = FlxG.save.data.antialiasing;
+		gfDance.animation.play('idle',true);
 		add(gfDance);
 		add(logoBl);
 
@@ -200,17 +202,30 @@ class TitleState extends MusicBeatState
 		if (initialized)
 			skipIntro();
 		else {
-			var diamond:FlxGraphic = FlxGraphic.fromClass(GraphicTransTileDiamond);
-			diamond.persist = true;
-			diamond.destroyOnNoUse = false;
+			var square:FlxGraphic = FlxGraphic.fromClass(GraphicTransTileSquare);
+			square.persist = true;
+			square.destroyOnNoUse = false;
 
-			FlxTransitionableState.defaultTransIn = new TransitionData(FADE, FlxColor.BLACK, 1, new FlxPoint(0, -1), {asset: diamond, width: 32, height: 32},
-				new FlxRect(-200, -200, FlxG.width * 1.4, FlxG.height * 1.4));
-			FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.7, new FlxPoint(0, 1),
-				{asset: diamond, width: 32, height: 32}, new FlxRect(-200, -200, FlxG.width * 1.4, FlxG.height * 1.4));
+			FlxTransitionableState.defaultTransIn = new TransitionData();
+			FlxTransitionableState.defaultTransOut = new TransitionData();
+
+			FlxTransitionableState.defaultTransIn.tileData = {asset: square, width: 32, height: 32};
+			FlxTransitionableState.defaultTransOut.tileData = {asset: square, width: 32, height: 32};
 
 			transIn = FlxTransitionableState.defaultTransIn;
 			transOut = FlxTransitionableState.defaultTransOut;
+
+			FlxTransitionableState.defaultTransIn.color = FlxColor.BLACK;
+			FlxTransitionableState.defaultTransIn.type = TILES;
+			FlxTransitionableState.defaultTransIn.direction.set(1, 1);
+			FlxTransitionableState.defaultTransIn.duration = 1;
+			FlxTransitionableState.defaultTransIn.tileData.asset = square;
+	
+			FlxTransitionableState.defaultTransOut.color = FlxColor.BLACK;
+			FlxTransitionableState.defaultTransOut.type = TILES;
+			FlxTransitionableState.defaultTransOut.direction.set(1, 1);
+			FlxTransitionableState.defaultTransOut.duration = 1;
+			FlxTransitionableState.defaultTransOut.tileData.asset = square;
 
 			// HAD TO MODIFY SOME BACKEND SHIT
 			// IF THIS PR IS HERE IF ITS ACCEPTED UR GOOD TO GO
@@ -342,7 +357,6 @@ class TitleState extends MusicBeatState
 		super.beatHit();
 
 		logoBl.animation.play('bump', true);
-		gfDance.animation.play('idle',true);
 
 		//FlxG.log.add(curBeat);
 

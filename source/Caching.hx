@@ -82,10 +82,6 @@ class Caching extends MusicBeatState
 
 		FlxGraphic.defaultPersist = FlxG.save.data.cacheImages;
 
-		#if debug
-		FlxG.save.data.cacheImages = false;
-		#end
-
 		#if cpp
 		if (FlxG.save.data.cacheImages)
 		{
