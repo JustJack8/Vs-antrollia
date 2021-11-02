@@ -475,6 +475,7 @@ class PlayState extends MusicBeatState
 		FlxG.mouse.visible = false;
 		alreadyskip = false;
 		instance = this;
+		FlxG.save.data.botplay = false;
 
 		if (FlxG.save.data.fpsCap > 290)
 			(cast(Lib.current.getChildAt(0), Main)).setFPSCap(800);
@@ -2277,16 +2278,6 @@ class PlayState extends MusicBeatState
 			trace("pitched to " + songMultiplier);
 		}*/
 
-		#if cpp
-		@:privateAccess
-		{
-			lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, 1);
-			if (vocals.playing)
-				lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, 1);
-
-		}
-		#end
-
 		for(i in 0...unspawnNotes.length)
 			if (unspawnNotes[i].strumTime < startTime)
 				unspawnNotes.remove(unspawnNotes[i]);
@@ -2307,43 +2298,24 @@ class PlayState extends MusicBeatState
 		if (SONG.needsVoices && !isSM)
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
 		else
-			vocals = new FlxSound();
+			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
 		#else
 		if (SONG.needsVoices)
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
 		else
-			vocals = new FlxSound();
+			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
 		#end
 
 		trace('loaded vocals');
 
 		FlxG.sound.list.add(vocals);
 
-		if (!paused)
-		{
-			#if sys
-			if (!isStoryMode && isSM)
-			{
-				trace("Loading " + pathToSm + "/" + sm.header.MUSIC);
-				var bytes = File.getBytes(pathToSm + "/" + sm.header.MUSIC);
-				var sound = new Sound();
-				sound.loadCompressedDataFromByteArray(bytes.getData(), bytes.length);
-				FlxG.sound.playMusic(sound);
-			}
-			else
-				
-				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
-			#else
-			FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
-			#end
-		}
+		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 
 		FlxG.sound.music.onComplete = checkfortrophy;
 		FlxG.sound.music.pause();
 
-		if (SONG.needsVoices)
 			FlxG.sound.cache(Paths.voices(PlayState.SONG.song));
-		if (!PlayState.isSM)
 			FlxG.sound.cache(Paths.inst(PlayState.SONG.song));
 
 
@@ -2801,13 +2773,6 @@ class PlayState extends MusicBeatState
 		vocals.time = FlxG.sound.music.time;
 		vocals.play();
 
-		@:privateAccess
-		{
-			lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, 1);
-			if (vocals.playing)
-				lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, 1);
-
-		}
 
 		#if windows
 		DiscordClient.changePresence(detailsText
@@ -2886,17 +2851,6 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-
-		#if cpp
-		if (FlxG.sound.music.playing)
-			@:privateAccess
-			{
-				lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH,1);
-				if (vocals.playing)
-					lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, 1);
-
-			}
-		#end
 
 		if (generatedMusic)
 			{
@@ -3200,7 +3154,6 @@ class PlayState extends MusicBeatState
 			FlxG.switchState(new Charting()); */
 
 		#if debug
-		health += 2;
 		if (FlxG.keys.justPressed.SIX)
 		{
 			if (useVideo)
@@ -3725,6 +3678,12 @@ class PlayState extends MusicBeatState
 			if (!usedTimeTravel) 
 			{
 
+				boyfriend.stunned = true;
+
+				persistentUpdate = false;
+				persistentDraw = false;
+				paused = true;
+
 				switch (songLowercase)
 				{
 					case 'reconnected':
@@ -3736,21 +3695,6 @@ class PlayState extends MusicBeatState
 					case 'blood-shed':
 						SONG.speed = 3;
 				}
-
-				if (spadetimer != null)
-					spadetimer.active = false;
-				if (scythetimer != null)
-					scythetimer.active = false;
-				if (bombtimer != null)
-					bombtimer.active = false;
-				if (cumtimer != null)
-					cumtimer.active = false;
-
-				boyfriend.stunned = true;
-
-				persistentUpdate = false;
-				persistentDraw = false;
-				paused = true;
 
 				storydeaths ++;
 
@@ -3816,6 +3760,18 @@ class PlayState extends MusicBeatState
 						bombtimer.active = false;
 					if (cumtimer != null)
 						cumtimer.active = false;
+
+					switch (songLowercase)
+					{
+						case 'reconnected':
+							SONG.speed = 1.6;
+						case 'explosive':
+							SONG.speed = 2;
+						case 'cbt':
+							SONG.speed = 2.5;
+						case 'blood-shed':
+							SONG.speed = 3;
+					}
 
 					boyfriend.stunned = true;
 	

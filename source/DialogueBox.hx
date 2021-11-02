@@ -65,11 +65,13 @@ class DialogueBox extends FlxSpriteGroup
 						sound = new FlxSound().loadEmbedded(Paths.music('Apology'),true);
 						sound.volume = 0;
 						sound.play();
+						FlxG.sound.list.add(sound);
 				
 			default:
 					sound = new FlxSound().loadEmbedded(Paths.music('Dialouge_Song'),true);
 					sound.volume = 0;
 					sound.play();
+					FlxG.sound.list.add(sound);
 		}
 
 		background = new FlxSprite(0,0);

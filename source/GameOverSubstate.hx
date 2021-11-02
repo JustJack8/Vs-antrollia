@@ -22,6 +22,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	var numba:Int = 0;
 	var isallowed:Bool = true;
 	var e:Bool = true;
+	var is100:Bool = true;
 	var deaths:FlxText;
 
 	public function new(x:Float, y:Float)
@@ -45,20 +46,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		if (FlxG.save.data.death == 100)
 			{
-				numba = 1;
-			}
-		else if (FlxG.random.bool(10))
-			{
-				switch(Random.int(1, 4)) {
-					case 1:
-						numba =2;
-					case 2:
-						numba =3;
-					case 3:
-						numba =10;
-					case 4:
-						numba =69;
-					}
+				is100 = true;
 			}
 
 		bf = new Boyfriend(x, y, daBf);
@@ -79,12 +67,6 @@ class GameOverSubstate extends MusicBeatSubstate
 		FlxG.camera.target = null;
 
 		bf.playAnim('firstDeath');
-
-		switch (numba)
-		{
-			case 10:
-				stageSuffix = 'tdm';
-		}
 
 		deaths = new FlxText(20, 20, Std.int(FlxG.width * 0.6), 'total deaths:' + FlxG.save.data.death, 20);
 		deaths.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
@@ -133,68 +115,30 @@ class GameOverSubstate extends MusicBeatSubstate
 			FlxTween.tween(FlxG.camera, {zoom: 1.4}, 2.5, {
 				ease: FlxEase.quadInOut});
 
-			if (numba == 0)
-				FlxG.sound.play(Paths.soundRandom('DeathQuote', 1, 28), 1);
-			switch (numba)
-			{
-				case 1:
-					FlxG.sound.play(Paths.sound('eastereggs/amazing'));
-					Conductor.songPosition = FlxG.sound.music.time;
-					FlxG.sound.music.volume = 0;
-					isallowed = false;
-					new FlxTimer().start(12, function(tmr:FlxTimer)
-						{
-							isallowed = true;
-							Conductor.songPosition = FlxG.sound.music.time;
-						},1);
-				case 2:
-					FlxG.sound.play(Paths.sound('eastereggs/TABILOL'));
-					isallowed = false;
-					Conductor.songPosition = FlxG.sound.music.time;
-					FlxG.sound.music.volume = 0;
-					new FlxTimer().start(12, function(tmr:FlxTimer)
-						{
-							isallowed = true;
-							Conductor.songPosition = FlxG.sound.music.time;
-						},1);
-				case 3:
-					FlxG.sound.play(Paths.sound('eastereggs/BEST_LINE'));
-					isallowed = false;
-					Conductor.songPosition = FlxG.sound.music.time;
-					FlxG.sound.music.volume = 0;
-					new FlxTimer().start(68.5, function(tmr:FlxTimer)
-						{
-							isallowed = true;
-							Conductor.songPosition = FlxG.sound.music.time;
-						},1);
-				case 10:
-					stageSuffix = 'tdm';
-					FlxG.sound.play(Paths.sound('eastereggs/gfmod'));
-			}
+			if (is100)
+				{
+					FlxG.sound.play(Paths.soundRandom('DeathQuote', 1, 28), 1);
+				}
+				else
+					{
+						FlxG.sound.play(Paths.sound('eastereggs/amazing'));
+					}
 
-			if (numba == 69)
-				FlxG.sound.playMusic(Paths.music('sus'));
-			else
-				FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
+			FlxG.sound.playMusic(Paths.music('gameOver'));
+			FlxG.sound.music.volume = 0.7;
 			startVibin = true;
 			if (e)
 				{
 					bf.playAnim('deathLoop', true);
 					e = false;
 				}
-				
-		}
 
-		if (!isallowed)
-			{
-				FlxG.sound.music.volume = 0;
-			}
-			else
+			
+			if (FlxG.sound.music.playing)
 				{
-					FlxG.sound.music.volume = 0.7;
+					Conductor.songPosition = FlxG.sound.music.time;
 				}
-
-		Conductor.songPosition = FlxG.sound.music.time;
+		}
 	}
 
 	override function beatHit()
@@ -215,16 +159,12 @@ class GameOverSubstate extends MusicBeatSubstate
 			isEnding = true;
 			bf.playAnim('deathConfirm', true);
 			FlxG.sound.music.stop();
-			if (numba == 69)
-				FlxG.sound.play(Paths.music('susend'));
-			else
-				FlxG.sound.play(Paths.music('gameOverEnd'));
-			
+			FlxG.sound.play(Paths.music('gameOverEnd'));
 			new FlxTimer().start(0.7, function(tmr:FlxTimer)
 			{
 				FlxG.camera.fade(FlxColor.BLACK, 2, false, function()
 				{
-					LoadingState.loadAndSwitchState(new PlayState());
+					LoadingState.loadAndSwitchState(new PlayState(), true);
 				});
 			});
 		}
