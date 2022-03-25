@@ -489,7 +489,7 @@ class Credits extends MusicBeatState
 				add(nametxt);
 
 				remove(roletxt1);
-				roletxt1 = new Alphabet(0, 0, 'minor coding', true, false, false);
+				roletxt1 = new Alphabet(0, 0, 'little coding', true, false, false); // im sorry but this just kinda pissed me off :/ -- just jack 
 				add(roletxt1);
 				roletxt1.istext1 = true;
 		

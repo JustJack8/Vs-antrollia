@@ -6328,6 +6328,10 @@ class PlayState extends MusicBeatState
 			}
 		if (songLowercase == 'exptrollgation' && curStep == 695)
 			{
+				if (!FlxG.save.data.ghost)
+				{
+					FlxG.save.data.ghost = true;
+				}
 				getfake();
 			}
 		if (songLowercase == 'exptrollgation' && curStep == 1535)
